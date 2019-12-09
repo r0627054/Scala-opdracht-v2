@@ -5,6 +5,7 @@ package sless.dsl
   */
 trait SelectorDSL extends BaseDSL {
   // modifiers
+  // takes a selector as argument and appending something
   protected def className(s: Selector, string: String): Selector
   protected def id(s: Selector, string: String): Selector
   protected def attribute(s: Selector, attr: String, value: Value): Selector
@@ -13,6 +14,7 @@ trait SelectorDSL extends BaseDSL {
   protected def pseudoElement(s: Selector, string: String): Selector
 
   // combinators
+  // making two existing selectors into a new one
   /** -> s + selector { ... } */
   protected def adjacent(s: Selector, selector: Selector): Selector
 
@@ -26,15 +28,18 @@ trait SelectorDSL extends BaseDSL {
   protected def descendant(s: Selector, selector: Selector): Selector
 
   // constructors
+  // creating selectors or sequence of selectors
   protected def group(selectors: Seq[Selector]): Selector
   def tipe(string: String): Selector
   val All: Selector
   def N(selectors: Selector*): Selector = group(selectors.toSeq)
 
   // bind to declarations
+  // creates a rule instance out of the selector with the declarations
   protected def bindTo(s: Selector, declarations: Seq[Declaration]): Rule
 
   // shorthand
+  // maps the notation to the method
   implicit class SelectorShorthand(s: Selector) {
     def c(string: String): Selector = className(s, string)
     def ##(string: String): Selector = id(s, string)
