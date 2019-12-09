@@ -4,7 +4,9 @@ package sless.dsl
   * https://developer.mozilla.org/en-US/docs/Web/CSS/Reference#Selectors
   */
 trait SelectorDSL extends BaseDSL {
-  // modifiers
+  //----------------
+  // 1.  modifiers
+  //----------------
   // takes a selector as argument and appending something
   protected def className(s: Selector, string: String): Selector
   protected def id(s: Selector, string: String): Selector
@@ -13,7 +15,11 @@ trait SelectorDSL extends BaseDSL {
   protected def pseudoClass(s: Selector, string: String): Selector
   protected def pseudoElement(s: Selector, string: String): Selector
 
-  // combinators
+
+
+  //----------------
+  // 2. combinators
+  //----------------
   // making two existing selectors into a new one
   /** -> s + selector { ... } */
   protected def adjacent(s: Selector, selector: Selector): Selector
@@ -27,7 +33,12 @@ trait SelectorDSL extends BaseDSL {
   /** -> s selector { ... } */
   protected def descendant(s: Selector, selector: Selector): Selector
 
-  // constructors
+
+
+
+  //----------------
+  // 3. constructors
+  //----------------
   // creating selectors or sequence of selectors
   protected def group(selectors: Seq[Selector]): Selector
   def tipe(string: String): Selector
@@ -38,6 +49,11 @@ trait SelectorDSL extends BaseDSL {
   // creates a rule instance out of the selector with the declarations
   protected def bindTo(s: Selector, declarations: Seq[Declaration]): Rule
 
+
+
+
+
+  // DRIES: do not touch atm
   // shorthand
   // maps the notation to the method
   implicit class SelectorShorthand(s: Selector) {
