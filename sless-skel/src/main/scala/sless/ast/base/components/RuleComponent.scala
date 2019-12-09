@@ -4,7 +4,11 @@ import sless.ast.base.components.selectors.SelectorComponent
 
 
 class RuleComponent(val s: SelectorComponent, declarations: Seq[DeclarationComponent]) extends BaseComponent {
-  override def compile(sheet: CssComponent): String = ???
+  override def compile(sheet: CssComponent): String = {
+    var result: String = s.compile(sheet) + "{"
+    declarations.foreach(declaration => result += declaration.compile(sheet) )
+    result + "}"
+  }
 
   override def pretty(sheet: CssComponent, spaces: Int): String = ???
 }

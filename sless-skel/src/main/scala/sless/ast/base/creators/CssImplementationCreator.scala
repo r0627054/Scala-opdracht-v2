@@ -3,7 +3,6 @@ package sless.ast.base.creators
 import sless.ast.base.components.CssComponent
 import sless.dsl.Compilable
 
-//PropertyDSL with SelectorDSL with ValueDSL with Compilable
 class CssImplementationCreator extends PropertyCreator with SelectorCreator with ValueCreator with Compilable {
   override def compile(sheet: CssComponent): String = sheet.compile(sheet)
 
