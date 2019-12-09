@@ -7,5 +7,5 @@ class AttributeSelectorComponent(override val selector: SelectorComponent, overr
   extends ModifierComponent(selector,string){
   override def compile(sheet: CssComponent): String = super.compile(sheet) + "[" + string + "=\"" + value.compile(sheet) + "\"]"
 
-  override def pretty(sheet: CssComponent, spaces: Int): String = ???
+  override def pretty(sheet: CssComponent, spaces: Int): String = super.pretty(sheet,spaces) + "[" + string + "=\"" + value.pretty(sheet,spaces) + "\"]"
 }

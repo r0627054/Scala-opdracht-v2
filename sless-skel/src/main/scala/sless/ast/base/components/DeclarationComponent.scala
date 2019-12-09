@@ -6,5 +6,7 @@ class DeclarationComponent(val prop: PropertyComponent, val value: ValueComponen
     prop.compile(sheet) + ":" + value.compile(sheet) + ";"
   }
 
-  override def pretty(sheet: CssComponent, spaces: Int): String = ???
+  override def pretty(sheet: CssComponent, spaces: Int): String = {
+    prop.pretty(sheet,spaces) + ": " + value.pretty(sheet,spaces) + ";"
+  }
 }

@@ -4,9 +4,17 @@ class CssComponent(val rules: Seq[RuleComponent]) extends BaseComponent {
 
   override def compile(sheet: CssComponent): String = {
     var result : String = ""
-    rules.foreach(r => (result +=  r.compile(sheet)))
+    rules.foreach(r => result +=  r.compile(sheet))
     result
   }
 
-  override def pretty(sheet: CssComponent, spaces: Int): String = ???
+  override def pretty(sheet: CssComponent, spaces: Int): String = {
+    var result : String = ""
+    val lastIndex : Int = if(rules.nonEmpty) rules.length - 1 else 0
+    for((rule,index) <- rules.view.zipWithIndex) {
+      result += rule.pretty(sheet,spaces)
+      if(index != lastIndex) result += "\n\n"
+    }
+    result
+  }
 }

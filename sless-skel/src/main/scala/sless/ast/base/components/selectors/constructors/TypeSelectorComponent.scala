@@ -6,5 +6,5 @@ import sless.ast.base.components.selectors.SelectorComponent
 class TypeSelectorComponent(val string:String) extends SelectorComponent{
   override def compile(sheet: CssComponent): String = string
 
-  override def pretty(sheet: CssComponent, spaces: Int): String = ???
+  override def pretty(sheet: CssComponent, spaces: Int): String = string
 }

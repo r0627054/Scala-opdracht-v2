@@ -26,7 +26,7 @@ object MijnApp {
       }
     )
 
-    println(CssImplementation.dsl.compile(ex))
+    println(CssImplementation.dsl.pretty(ex,4))
   }
 
 }

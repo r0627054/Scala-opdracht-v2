@@ -7,7 +7,7 @@ import sless.ast.base.components.selectors.SelectorComponent
 class AdjacentSelectorComponent(override val firstSelector: SelectorComponent, override val secondSelector:SelectorComponent)
   extends CombinatorSelectorComponent(firstSelector,secondSelector){
 
-  override def compile(sheet: CssComponent): String = toStringWithMiddleCharacter("+",sheet)
+  override def compile(sheet: CssComponent): String = toStringCompileWithMiddleCharacter("+",sheet)
 
-  override def pretty(sheet: CssComponent, spaces: Int): String = ???
+  override def pretty(sheet: CssComponent, spaces: Int): String = toStringPrettyMiddleCharacterWithExtraSpaces("+",sheet,spaces)
 }

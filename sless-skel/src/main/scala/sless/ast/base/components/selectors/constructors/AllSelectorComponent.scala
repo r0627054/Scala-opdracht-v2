@@ -4,7 +4,9 @@ import sless.ast.base.components.CssComponent
 import sless.ast.base.components.selectors.SelectorComponent
 
 class AllSelectorComponent extends SelectorComponent {
-  override def compile(sheet: CssComponent): String = "*"
+  val allStringSelectorSymbol : String = "*"
 
-  override def pretty(sheet: CssComponent, spaces: Int): String = ???
+  override def compile(sheet: CssComponent): String = allStringSelectorSymbol
+
+  override def pretty(sheet: CssComponent, spaces: Int): String = allStringSelectorSymbol
 }

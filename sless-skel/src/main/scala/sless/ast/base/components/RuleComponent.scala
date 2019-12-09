@@ -10,5 +10,9 @@ class RuleComponent(val s: SelectorComponent, declarations: Seq[DeclarationCompo
     result + "}"
   }
 
-  override def pretty(sheet: CssComponent, spaces: Int): String = ???
+  override def pretty(sheet: CssComponent, spaces: Int): String = {
+    var result: String = s.pretty(sheet,spaces) + " {\n"
+    declarations.foreach(declaration => result += " "*spaces + declaration.pretty(sheet,spaces) + "\n" )
+    result + "}"
+  }
 }
