@@ -19,4 +19,8 @@ class PropertyComponent(val propertyName: String) extends BaseComponent {
     MarginType.withName(propertyName.substring(7))
   }
 
+  def equalsPropertyName(name: String) : Boolean = {
+    name == propertyName
+  }
+
 }

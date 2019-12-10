@@ -81,7 +81,8 @@ class RuleComponent(val s: SelectorComponent, val declarations: Seq[DeclarationC
     new RuleComponent(s,newDeclarations)
   }
 
-
-
-
+  def numberOfDeclarationsOfPropertyWithName(propertyName: String) : Int = {
+    //in case a rule has multiple declarations of a certain property
+    declarations.filter(dec => dec.hasPropertyName(propertyName)).length
+  }
 }

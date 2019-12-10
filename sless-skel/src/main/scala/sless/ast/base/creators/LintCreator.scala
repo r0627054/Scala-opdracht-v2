@@ -19,11 +19,13 @@ trait LintCreator extends BaseAST with LintDSL {
     * The values from the individual properties are aggregated in the order top-right-bottom-left, with spaces in between.
     */
   override def aggregateMargins(css: CssComponent): (Boolean, CssComponent) = {
-    css.aggregateMargins(css)
+    css.aggregateMargins()
   }
 
   /**
     * Check if the given sheet contains strictly more than n 'float' properties and, if so, returns true, otherwise false.
     */
-  override def limitFloats(css: CssComponent, n: Integer): Boolean = ???
+  override def limitFloats(css: CssComponent, n: Integer): Boolean = {
+    css.numberOfDeclarationsOfPropertyWithName("float") > n
+  }
 }

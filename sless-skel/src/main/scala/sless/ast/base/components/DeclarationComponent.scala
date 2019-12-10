@@ -24,4 +24,8 @@ class DeclarationComponent(val prop: PropertyComponent, val value: ValueComponen
     value.value
   }
 
+  def hasPropertyName(name: String) : Boolean = {
+    prop.equalsPropertyName(name)
+  }
+
 }

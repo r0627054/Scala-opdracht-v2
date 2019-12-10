@@ -3,11 +3,9 @@ package sless.ast.base.components
 class CssComponent(val rules: Seq[RuleComponent]) extends BaseComponent {
 
 
-  def aggregateMargins(css: CssComponent): (Boolean, CssComponent) = {
-    //----------------------VERDER IMPLEMENTEREN-----------------------
-    //-----------------------------------------------------------------
+  def aggregateMargins(): (Boolean, CssComponent) = {
     val (isAggregated,allRules) :(Seq[Boolean], Seq[RuleComponent])=rules.map(rule => rule.aggregateMargins()).unzip
-    (isAggregated.forall(isagg => isagg), new CssComponent(allRules))
+    (isAggregated.forall(isAgg => isAgg), new CssComponent(allRules))
   }
 
   override def compile(sheet: CssComponent): String = {
@@ -36,6 +34,10 @@ class CssComponent(val rules: Seq[RuleComponent]) extends BaseComponent {
 
   def removeEmptyRules(): (Boolean, CssComponent) = {
     (hasAnEmptyRule,new CssComponent(removedEmptyRules))
+  }
+
+  def numberOfDeclarationsOfPropertyWithName(propertyName: String) : Int = {
+    rules.map(rule => rule.numberOfDeclarationsOfPropertyWithName(propertyName)).sum
   }
 
 }
