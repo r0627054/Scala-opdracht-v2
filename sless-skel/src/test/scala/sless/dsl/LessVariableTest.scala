@@ -13,12 +13,28 @@ class LessVariableTest extends FunSuite {
         """*#testId{background-color:red;}""")
   }
 
-  test("Test width") {
-    val ex = css(LessVariableImplementation.doubledWidth("testId",20))
+  test("Red color test of Dries") {
+    val ex = LessVariableImplementation.colorNamedRed("h1")
 
     assert(
       LessVariableImplementation.dsl.compile(ex) ===
-        """testId{height:20;width:40;}""")
+        """*#h1{background-color:red;}""")
+  }
+
+    test("Test width") {
+      val ex = css(LessVariableImplementation.doubledWidth("testId",20))
+
+      assert(
+        LessVariableImplementation.dsl.compile(ex) ===
+          """testId{height:20;width:40;}""")
+    }
+
+  test("Test width of Dries") {
+    val ex = css(LessVariableImplementation.doubledWidth("h1",50))
+
+    assert(
+      LessVariableImplementation.dsl.compile(ex) ===
+        """h1{height:50;width:100;}""")
   }
 
 }
