@@ -1,7 +1,7 @@
 package sless.ast.base.creators
 
 import sless.ast.base.BaseAST
-import sless.ast.base.components.RuleComponent
+import sless.ast.base.components.rule.RuleComponent
 import sless.ast.base.components.selectors.combinators.{AdjacentSelectorComponent, ChildSelectorComponent, DescendantSelectorComponent, GeneralSelectorComponent}
 import sless.ast.base.components.selectors.constructors.{AllSelectorComponent, GroupSelectorComponent, TypeSelectorComponent}
 import sless.ast.base.components.selectors.modifiers.{AttributeSelectorComponent, ClassNameSelectorComponent, IdSelectorComponent, PseudoClassSelectorComponent, PseudoElementSelectorComponent}

@@ -1,5 +1,7 @@
 package sless.ast.base.components
 
+import sless.ast.base.components.rule.RuleComponent
+
 class CssComponent(val rules: Seq[RuleComponent]) extends BaseComponent {
 
 

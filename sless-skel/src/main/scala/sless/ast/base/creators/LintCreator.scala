@@ -1,7 +1,7 @@
 package sless.ast.base.creators
 
 import sless.ast.base.BaseAST
-import sless.ast.base.components.{CssComponent, RuleComponent}
+import sless.ast.base.components.CssComponent
 import sless.dsl.LintDSL
 
 trait LintCreator extends BaseAST with LintDSL {

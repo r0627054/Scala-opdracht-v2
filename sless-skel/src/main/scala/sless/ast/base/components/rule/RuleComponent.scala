@@ -1,6 +1,8 @@
-package sless.ast.base.components
+package sless.ast.base.components.rule
 
+import sless.ast.base.components.declaration.DeclarationComponent
 import sless.ast.base.components.selectors.SelectorComponent
+import sless.ast.base.components.{BaseComponent, CssComponent, PropertyComponent, ValueComponent}
 import sless.ast.base.enumeration.MarginType
 
 

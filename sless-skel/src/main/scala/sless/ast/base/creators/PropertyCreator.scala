@@ -1,7 +1,8 @@
 package sless.ast.base.creators
 
 import sless.ast.base.BaseAST
-import sless.ast.base.components.{DeclarationComponent, PropertyComponent}
+import sless.ast.base.components.PropertyComponent
+import sless.ast.base.components.declaration.DeclarationComponent
 import sless.dsl.PropertyDSL
 
 trait PropertyCreator extends BaseAST with PropertyDSL{
