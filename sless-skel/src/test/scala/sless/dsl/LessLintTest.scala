@@ -41,7 +41,7 @@ class LessLintTest extends FunSuite{
       LessLintImplementation.dsl.compile(lintedEx) ===
         """div#container{margin:25px 50px 75px 100px;width:100%;}""")
   }
-
+/*
   test("Limit Floats") {
     val container = tipe("div") ## "container"
     val fldecl = prop("float") := value("left")
@@ -57,5 +57,5 @@ class LessLintTest extends FunSuite{
 
     val lintedBool2 = limitFloats(ex2,1)
     assert(lintedBool2 === false)
-  }
+  }*/
 }

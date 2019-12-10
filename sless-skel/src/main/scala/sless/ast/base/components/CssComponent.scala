@@ -17,4 +17,17 @@ class CssComponent(val rules: Seq[RuleComponent]) extends BaseComponent {
     }
     result
   }
+
+  def removedEmptyRules: Seq[RuleComponent] = {
+    rules.filter(r => r.hasDeclarations())
+  }
+
+  def hasAnEmptyRule: Boolean = {
+    rules.exists(r => r.hasNoDeclarations())
+  }
+
+  def removeEmptyRules(css: CssComponent): (Boolean, CssComponent) = {
+    (hasAnEmptyRule,new CssComponent(removedEmptyRules))
+  }
+
 }

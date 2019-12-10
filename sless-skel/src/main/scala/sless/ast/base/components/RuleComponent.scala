@@ -3,7 +3,7 @@ package sless.ast.base.components
 import sless.ast.base.components.selectors.SelectorComponent
 
 
-class RuleComponent(val s: SelectorComponent, declarations: Seq[DeclarationComponent]) extends BaseComponent {
+class RuleComponent(val s: SelectorComponent, val declarations: Seq[DeclarationComponent]) extends BaseComponent {
   override def compile(sheet: CssComponent): String = {
     var result: String = s.compile(sheet) + "{"
     declarations.foreach(declaration => result += declaration.compile(sheet) )
@@ -15,4 +15,13 @@ class RuleComponent(val s: SelectorComponent, declarations: Seq[DeclarationCompo
     declarations.foreach(declaration => result += " "*spaces + declaration.pretty(sheet,spaces) + "\n" )
     result + "}"
   }
+
+  def hasNoDeclarations(): Boolean = {
+    declarations.isEmpty
+  }
+
+  def hasDeclarations() : Boolean = {
+    declarations.nonEmpty
+  }
+
 }
