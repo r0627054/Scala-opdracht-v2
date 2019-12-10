@@ -1,6 +1,7 @@
 package sless.ast.base.components
 
-import javafx.print.Printer.MarginType
+import sless.ast.base.enumeration.MarginType
+
 
 class PropertyComponent(val propertyName: String) extends BaseComponent {
   override def compile(sheet: CssComponent): String = propertyName
@@ -11,11 +12,11 @@ class PropertyComponent(val propertyName: String) extends BaseComponent {
     propertyName.startsWith("margin-")
   }
 
-  def getMarginPosition() : MarginType = {
+  def getMarginPosition() : MarginType.Value = {
     if(!this.containsMarginProperty()){
       throw new IllegalArgumentException("This is not a margin property!")
     }
-    MarginType.valueOf(propertyName.substring(7))
+    MarginType.withName(propertyName.substring(7))
   }
 
 }

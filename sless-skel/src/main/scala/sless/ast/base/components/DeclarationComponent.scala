@@ -1,5 +1,7 @@
 package sless.ast.base.components
 
+import sless.ast.base.enumeration.MarginType
+
 
 class DeclarationComponent(val prop: PropertyComponent, val value: ValueComponent) extends BaseComponent {
   override def compile(sheet: CssComponent): String = {
@@ -9,4 +11,17 @@ class DeclarationComponent(val prop: PropertyComponent, val value: ValueComponen
   override def pretty(sheet: CssComponent, spaces: Int): String = {
     prop.pretty(sheet,spaces) + ": " + value.pretty(sheet,spaces) + ";"
   }
+
+  def containsMarginProperty() : Boolean = {
+    prop.containsMarginProperty()
+  }
+
+  def getMarginPosition() : MarginType.Value = {
+    prop.getMarginPosition()
+  }
+
+  def getStringValue() : String = {
+    value.value
+  }
+
 }
