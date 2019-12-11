@@ -5,6 +5,14 @@ import org.scalatest.FunSuite
 class MixinTest extends FunSuite {
   import MixinImplementation.dsl._
 
+  test("simpleColorMixinTest by Dries") {
+    val paddingLeft = prop("padding-left") := value("0.5em")
+    val paddingTop = prop("padding-Top") := value("0.5em")
+    val mixin = List(asgn,asgn)
+    val colorMixin = MixinImplementation.simpleColorMixin
+    val rule = All.mixin(colorMixin,)
+  }
+
   test("Simple mixin") {
     val asgn = prop("property-1") := value("value-1")
     val mixin = List(asgn,asgn)

@@ -1,15 +1,25 @@
 package sless.dsl
 
+import sless.ast.base.components.{PropertyComponent, ValueComponent}
+import sless.ast.base.components.declaration.DeclarationComponent
+import sless.ast.base.creators.CssImplementationCreator
+
 object MixinImplementation {
   type DSL = PropertyDSL with SelectorDSL with ValueDSL with MixinDSL with Compilable
-  val dsl: DSL = ???
+  val dsl: DSL = new CssImplementationCreator()
+
+  import MixinImplementation.dsl._
 
   /**
     * Create a non-parametric mixin that contains the declarations:
     *     color: red;
     *     background: white;
     */
-  val simpleColorMixin : Seq[dsl.Declaration] = ???
+  val simpleColorMixin : Seq[dsl.Declaration] = {
+    val color = prop("background-color")
+    val red = value("red")
+    Seq(createDeclaration("color","red"), createDeclaration("background","white"))
+  }
 
   /**
     * Create a parametric mixin that takes a $mixin and an argument $padding as arguments, and consists of the following declarations:
@@ -27,5 +37,11 @@ object MixinImplementation {
     *     width: $height * 2;
     */
    val doubledWidthMixin : Int => Seq[dsl.Declaration] = (height: Int) => ???
+
+
+  private def createDeclaration(property: String, va : String) : dsl.Declaration = {
+    prop(property) := value(va)
+  }
+
 
 }
