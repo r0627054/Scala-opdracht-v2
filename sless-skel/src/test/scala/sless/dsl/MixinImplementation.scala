@@ -26,7 +26,9 @@ object MixinImplementation {
     *     $mixin **i.e., mixin's declarations come first**
     *     margin: $padding;
     */
-  val nestedMixin : (Seq[dsl.Declaration], String) => Seq[dsl.Declaration] = (mixin: Seq[dsl.Declaration], padding: String) => ???
+  val nestedMixin : (Seq[dsl.Declaration], String) => Seq[dsl.Declaration] = (mixin: Seq[dsl.Declaration], padding: String) => {
+    mixin ++ Seq(createDeclaration("margin",padding))
+  }
 
   /**
     * NOTE: Remember this assignment? Without realizing it, you already implemented a kind of parametric mixin earlier while experimenting with variables,
@@ -36,7 +38,9 @@ object MixinImplementation {
     *     height: $height;
     *     width: $height * 2;
     */
-   val doubledWidthMixin : Int => Seq[dsl.Declaration] = (height: Int) => ???
+   val doubledWidthMixin : Int => Seq[dsl.Declaration] = (height: Int) => {
+     Seq(createDeclaration("height",height.toString + "em"),createDeclaration("width",(height*2).toString +"em") )
+   }
 
 
   private def createDeclaration(property: String, va : String) : dsl.Declaration = {
