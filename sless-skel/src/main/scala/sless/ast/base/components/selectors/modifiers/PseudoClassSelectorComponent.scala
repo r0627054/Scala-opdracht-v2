@@ -6,9 +6,9 @@ import sless.ast.base.components.selectors.SelectorComponent
 
 class PseudoClassSelectorComponent(override val selector: SelectorComponent, override val string: String)
   extends ModifierComponent(selector,string){
-  override def compile(sheet: CssComponent): String = super.compile(sheet) + pseudoClassSelectorToString()
+  override def basic(): String = super.basic() + pseudoClassSelectorToString()
 
-  override def pretty(sheet: CssComponent, spaces: Int): String = super.pretty(sheet, spaces) + pseudoClassSelectorToString()
+  override def pretty(spaces: Int): String = super.pretty(spaces) + pseudoClassSelectorToString()
 
   def pseudoClassSelectorToString() : String = ":" + string
 }

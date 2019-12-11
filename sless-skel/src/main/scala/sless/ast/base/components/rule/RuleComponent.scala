@@ -11,15 +11,15 @@ class RuleComponent(val s: SelectorComponent, val declarations: Seq[DeclarationC
 
 
 
-  override def compile(sheet: CssComponent): String = {
-    var result: String = s.compile(sheet) + "{"
-    declarations.foreach(declaration => result += declaration.compile(sheet) )
+  override def basic(): String = {
+    var result: String = s.basic() + "{"
+    declarations.foreach(declaration => result += declaration.basic() )
     result + "}"
   }
 
-  override def pretty(sheet: CssComponent, spaces: Int): String = {
-    var result: String = s.pretty(sheet,spaces) + " {\n"
-    declarations.foreach(declaration => result += " "*spaces + declaration.pretty(sheet,spaces) + "\n" )
+  override def pretty(spaces: Int): String = {
+    var result: String = s.pretty(spaces) + " {\n"
+    declarations.foreach(declaration => result += " "*spaces + declaration.pretty(spaces) + "\n" )
     result + "}"
   }
 

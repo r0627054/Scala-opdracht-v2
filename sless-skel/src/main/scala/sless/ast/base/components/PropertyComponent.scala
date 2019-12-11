@@ -4,9 +4,9 @@ import sless.ast.base.enumeration.MarginType
 
 
 class PropertyComponent(val propertyName: String) extends BaseComponent {
-  override def compile(sheet: CssComponent): String = propertyName
+  override def basic(): String = propertyName
 
-  override def pretty(sheet: CssComponent, spaces: Int): String = propertyName
+  override def pretty(spaces: Int): String = propertyName
 
   def containsMarginProperty() : Boolean = {
     propertyName.startsWith("margin-")

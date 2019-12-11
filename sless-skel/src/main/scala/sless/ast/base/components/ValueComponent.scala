@@ -1,7 +1,7 @@
 package sless.ast.base.components
 
 class ValueComponent(val value: String) extends BaseComponent {
-  override def compile(sheet: CssComponent): String = value
+  override def basic(): String = value
 
-  override def pretty(sheet: CssComponent, spaces: Int): String = value
+  override def pretty(spaces: Int): String = value
 }

@@ -10,17 +10,17 @@ class CssComponent(val rules: Seq[RuleComponent]) extends BaseComponent {
     (isAggregated.forall(isAgg => isAgg), new CssComponent(allRules))
   }
 
-  override def compile(sheet: CssComponent): String = {
+  override def basic(): String = {
     var result : String = ""
-    rules.foreach(r => result +=  r.compile(sheet))
+    rules.foreach(r => result +=  r.basic())
     result
   }
 
-  override def pretty(sheet: CssComponent, spaces: Int): String = {
+  override def pretty(spaces: Int): String = {
     var result : String = ""
     val lastIndex : Int = if(rules.nonEmpty) rules.length - 1 else 0
     for((rule,index) <- rules.view.zipWithIndex) {
-      result += rule.pretty(sheet,spaces)
+      result += rule.pretty(spaces)
       if(index != lastIndex) result += "\n\n"
     }
     result

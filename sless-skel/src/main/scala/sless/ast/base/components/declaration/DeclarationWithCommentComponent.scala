@@ -11,12 +11,12 @@ class DeclarationWithCommentComponent(override val prop: PropertyComponent, over
     this(declarationComponent.prop,declarationComponent.value,comment)
   }
 
-  override def compile(sheet: CssComponent): String = {
-     super.compile(sheet) + format(comment)
+  override def basic(): String = {
+     super.basic() + format(comment)
   }
 
-  override def pretty(sheet: CssComponent, spaces: Int): String = {
-    super.pretty(sheet,spaces) + " " + format(comment)
+  override def pretty(spaces: Int): String = {
+    super.pretty(spaces) + " " + format(comment)
   }
 
 

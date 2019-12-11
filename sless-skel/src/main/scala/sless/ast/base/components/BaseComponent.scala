@@ -1,8 +1,7 @@
 package sless.ast.base.components
 
-import sless.ast.base.BaseAST
-import sless.dsl.Compilable
+import sless.ast.base.{BaseAST, Printable}
 
-abstract class BaseComponent extends BaseAST with Compilable{
+abstract class BaseComponent extends BaseAST with Printable{
 
 }

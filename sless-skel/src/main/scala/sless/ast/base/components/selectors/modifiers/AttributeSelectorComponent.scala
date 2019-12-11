@@ -5,7 +5,7 @@ import sless.ast.base.components.selectors.SelectorComponent
 
 class AttributeSelectorComponent(override val selector: SelectorComponent, override val string: String, val value: ValueComponent)
   extends ModifierComponent(selector,string){
-  override def compile(sheet: CssComponent): String = super.compile(sheet) + "[" + string + "=\"" + value.compile(sheet) + "\"]"
+  override def basic(): String = super.basic() + "[" + string + "=\"" + value.basic() + "\"]"
 
-  override def pretty(sheet: CssComponent, spaces: Int): String = super.pretty(sheet,spaces) + "[" + string + "=\"" + value.pretty(sheet,spaces) + "\"]"
+  override def pretty(spaces: Int): String = super.pretty(spaces) + "[" + string + "=\"" + value.pretty(spaces) + "\"]"
 }

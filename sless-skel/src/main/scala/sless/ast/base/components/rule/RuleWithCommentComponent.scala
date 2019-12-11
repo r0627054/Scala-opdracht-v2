@@ -12,12 +12,12 @@ class RuleWithCommentComponent(override val s: SelectorComponent, override val d
     this(ruleComponent.s,ruleComponent.declarations,comment)
   }
 
-  override def compile(sheet: CssComponent): String = {
-    format(comment) + super.compile(sheet)
+  override def basic(): String = {
+    format(comment) + super.basic()
   }
 
-  override def pretty(sheet: CssComponent, spaces: Int): String = {
-    format(comment) + "\n" + super.pretty(sheet,spaces)
+  override def pretty(spaces: Int): String = {
+    format(comment) + "\n" + super.pretty(spaces)
   }
 
 }

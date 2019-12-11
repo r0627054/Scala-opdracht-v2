@@ -5,12 +5,12 @@ import sless.ast.base.enumeration.MarginType
 
 
 class DeclarationComponent(val prop: PropertyComponent, val value: ValueComponent) extends BaseComponent {
-  override def compile(sheet: CssComponent): String = {
-    prop.compile(sheet) + ":" + value.compile(sheet) + ";"
+  override def basic(): String = {
+    prop.basic() + ":" + value.basic() + ";"
   }
 
-  override def pretty(sheet: CssComponent, spaces: Int): String = {
-    prop.pretty(sheet,spaces) + ": " + value.pretty(sheet,spaces) + ";"
+  override def pretty(spaces: Int): String = {
+    prop.pretty(spaces) + ": " + value.pretty(spaces) + ";"
   }
 
   def containsMarginProperty() : Boolean = {
