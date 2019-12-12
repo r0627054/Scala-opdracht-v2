@@ -2,9 +2,9 @@ package sless.ast.base.creators
 
 import sless.ast.base.BaseAST
 import sless.ast.base.components.rule.RuleComponent
-import sless.ast.base.components.selectors.combinators.{AdjacentSelectorComponent, ChildSelectorComponent, DescendantSelectorComponent, GeneralSelectorComponent}
-import sless.ast.base.components.selectors.constructors.{AllSelectorComponent, GroupSelectorComponent, TypeSelectorComponent}
-import sless.ast.base.components.selectors.modifiers.{AttributeSelectorComponent, ClassNameSelectorComponent, IdSelectorComponent, PseudoClassSelectorComponent, PseudoElementSelectorComponent}
+import sless.ast.base.components.selector.combinators.{AdjacentSelectorComponent, ChildSelectorComponent, DescendantSelectorComponent, GeneralSelectorComponent}
+import sless.ast.base.components.selector.constructors.{AllSelectorComponent, GroupSelectorComponent, TypeSelectorComponent}
+import sless.ast.base.components.selector.modifiers.{AttributeSelectorComponent, ClassNameSelectorComponent, IdSelectorComponent, PseudoClassSelectorComponent, PseudoElementSelectorComponent}
 import sless.dsl.SelectorDSL
 
 trait SelectorCreator extends BaseAST with SelectorDSL {

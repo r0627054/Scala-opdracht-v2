@@ -1,6 +1,7 @@
 package sless.ast.base.components.declaration
 
-import sless.ast.base.components.{BaseComponent, CssComponent, PropertyComponent, ValueComponent}
+import sless.ast.base.components.value.ValueComponent
+import sless.ast.base.components.{BaseComponent, CssComponent, PropertyComponent}
 import sless.ast.base.enumeration.MarginType
 
 
@@ -22,7 +23,7 @@ class DeclarationComponent(val prop: PropertyComponent, val value: ValueComponen
   }
 
   def getStringValue() : String = {
-    value.value
+    value.getStringValue()
   }
 
   def hasPropertyName(name: String) : Boolean = {

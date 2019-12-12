@@ -1,8 +1,10 @@
 package sless.ast.base.components.rule
 
 import sless.ast.base.components.declaration.DeclarationComponent
-import sless.ast.base.components.selectors.SelectorComponent
-import sless.ast.base.components.{BaseComponent, CssComponent, PropertyComponent, ValueComponent}
+import sless.ast.base.components.selector.SelectorComponent
+import sless.ast.base.components.value.ValueComponent
+import sless.ast.base.components.value.basic.BasicValueComponent
+import sless.ast.base.components.{BaseComponent, PropertyComponent}
 import sless.ast.base.enumeration.MarginType
 
 
@@ -67,14 +69,14 @@ class RuleComponent(val s: SelectorComponent, val declarations: Seq[DeclarationC
 
   private def replaceMargins(margins: Array[ValueComponent]): RuleComponent = {
     var isFirst : Boolean= true
-    val marginAggregate : String = margins.map(valCom => valCom.value).mkString(" ")
+    val marginAggregate : String = margins.map(valCom => valCom.getStringValue()).mkString(" ")
     var newDeclarations: Seq[DeclarationComponent] = Seq()
     for(declaration <- declarations){
       if(declaration.containsMarginProperty()){
         if(isFirst){
           //the first margin property is replaces with the full margin specification
           isFirst = false
-          newDeclarations =  newDeclarations:+ new DeclarationComponent(new PropertyComponent("margin"),new ValueComponent(marginAggregate))
+          newDeclarations =  newDeclarations:+ new DeclarationComponent(new PropertyComponent("margin"),new BasicValueComponent(marginAggregate))
         }
       }else {
         newDeclarations = newDeclarations:+ declaration

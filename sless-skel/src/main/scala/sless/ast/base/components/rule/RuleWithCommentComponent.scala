@@ -3,7 +3,7 @@ package sless.ast.base.components.rule
 import sless.ast.base.CommentFormat
 import sless.ast.base.components.CssComponent
 import sless.ast.base.components.declaration.DeclarationComponent
-import sless.ast.base.components.selectors.SelectorComponent
+import sless.ast.base.components.selector.SelectorComponent
 
 class RuleWithCommentComponent(override val s: SelectorComponent, override val declarations: Seq[DeclarationComponent], val comment: String)
   extends RuleComponent(s,declarations) with CommentFormat {

@@ -1,6 +1,6 @@
 package sless.dsl
 
-import sless.ast.base.components.{PropertyComponent, ValueComponent}
+import sless.ast.base.components.PropertyComponent
 import sless.ast.base.components.declaration.DeclarationComponent
 import sless.ast.base.creators.CssImplementationCreator
 

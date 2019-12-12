@@ -2,7 +2,8 @@ package sless.ast.base.components.declaration
 
 
 import sless.ast.base.CommentFormat
-import sless.ast.base.components.{CssComponent, PropertyComponent, ValueComponent}
+import sless.ast.base.components.value.ValueComponent
+import sless.ast.base.components.{CssComponent, PropertyComponent}
 
 class DeclarationWithCommentComponent(override val prop: PropertyComponent, override val value: ValueComponent, val comment : String)
   extends DeclarationComponent(prop,value) with CommentFormat {

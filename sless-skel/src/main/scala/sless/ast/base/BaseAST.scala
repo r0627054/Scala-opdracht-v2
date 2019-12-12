@@ -1,9 +1,10 @@
 package sless.ast.base
 
-import sless.ast.base.components.selectors.SelectorComponent
+import sless.ast.base.components.selector.SelectorComponent
 import sless.ast.base.components._
 import sless.ast.base.components.declaration.DeclarationComponent
 import sless.ast.base.components.rule.RuleComponent
+import sless.ast.base.components.value.ValueComponent
 import sless.dsl.BaseDSL
 
 trait BaseAST extends BaseDSL  {
