@@ -9,4 +9,5 @@ class AttributeSelectorComponent(override val selector: SelectorComponent, overr
   override def basic(): String = super.basic() + "[" + string + "=\"" + value.basic() + "\"]"
 
   override def pretty(spaces: Int): String = super.pretty(spaces) + "[" + string + "=\"" + value.pretty(spaces) + "\"]"
+
 }

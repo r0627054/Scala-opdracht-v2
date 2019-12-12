@@ -8,4 +8,5 @@ class ClassNameSelectorComponent(override val selector: SelectorComponent, overr
   override def basic(): String = super.basic() + "." + string
 
   override def pretty(spaces: Int): String = super.pretty(spaces) + "." + string
+
 }

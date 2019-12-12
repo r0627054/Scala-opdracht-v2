@@ -10,4 +10,6 @@ class IdSelectorComponent(override val selector: SelectorComponent, override val
   override def pretty(spaces: Int): String = super.pretty(spaces) + toStringIdSelector()
 
   def toStringIdSelector() : String = "#" + string
+
+
 }

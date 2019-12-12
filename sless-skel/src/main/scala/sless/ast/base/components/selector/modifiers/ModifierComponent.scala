@@ -7,4 +7,11 @@ abstract class ModifierComponent(val selector: SelectorComponent, val string: St
   override def basic(): String = selector.basic()
 
   override def pretty(spaces: Int): String = selector.pretty(spaces)
+
+  /**
+    * Extend the selector of the modifier class.
+    * @param css The old CSS component where the selector isn't replaced
+    * @return The new CSS component where the selector is replaced
+    */
+  override def extendSelectorReplacement(css: CssComponent): CssComponent = selector.extendSelectorReplacement(css)
 }

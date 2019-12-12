@@ -1,6 +1,7 @@
 package sless.ast.base.components
 
 import sless.ast.base.components.rule.RuleComponent
+import sless.ast.base.components.selector.SelectorComponent
 
 class CssComponent(val rules: Seq[RuleComponent]) extends BaseComponent {
 
@@ -40,6 +41,11 @@ class CssComponent(val rules: Seq[RuleComponent]) extends BaseComponent {
 
   def numberOfDeclarationsOfPropertyWithName(propertyName: String) : Int = {
     rules.map(rule => rule.numberOfDeclarationsOfPropertyWithName(propertyName)).sum
+  }
+
+  def replaceGivenSelectorWith(oldSelector: SelectorComponent, newSelector: SelectorComponent): Css ={
+    val replacedRules: Seq[Rule] = rules.map(rule => rule.replaceGivenSelectorWith(oldSelector,newSelector))
+    new CssComponent(replacedRules)
   }
 
 }

@@ -10,9 +10,6 @@ import sless.ast.base.enumeration.MarginType
 
 class RuleComponent(val s: SelectorComponent, val declarations: Seq[DeclarationComponent]) extends BaseComponent {
 
-
-
-
   override def basic(): String = {
     var result: String = s.basic() + "{"
     declarations.foreach(declaration => result += declaration.basic() )
@@ -89,4 +86,15 @@ class RuleComponent(val s: SelectorComponent, val declarations: Seq[DeclarationC
     //in case a rule has multiple declarations of a certain property
     declarations.filter(dec => dec.hasPropertyName(propertyName)).length
   }
+
+
+  def replaceGivenSelectorWith(oldSelector: SelectorComponent, newSelector: SelectorComponent): Rule ={
+    if(s == oldSelector){
+      new Rule(newSelector, declarations)
+    }else {
+      this
+    }
+  }
+
+
 }
