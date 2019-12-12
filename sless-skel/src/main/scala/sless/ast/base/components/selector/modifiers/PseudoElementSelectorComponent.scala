@@ -2,7 +2,7 @@ package sless.ast.base.components.selector.modifiers
 import sless.ast.base.components.CssComponent
 import sless.ast.base.components.selector.SelectorComponent
 
-class PseudoElementSelectorComponent(override val selector: SelectorComponent, override val string: String)
+case class PseudoElementSelectorComponent(override val selector: SelectorComponent, override val string: String)
   extends ModifierComponent(selector,string){
   override def basic(): String = super.basic() + pseudoElementSelectorToString()
 

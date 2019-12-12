@@ -3,7 +3,7 @@ package sless.ast.base.components.selector.modifiers
 import sless.ast.base.components.CssComponent
 import sless.ast.base.components.selector.SelectorComponent
 
-class IdSelectorComponent(override val selector: SelectorComponent, override val string: String)
+case class IdSelectorComponent(override val selector: SelectorComponent, override val string: String)
   extends ModifierComponent(selector,string){
   override def basic(): String = super.basic() + toStringIdSelector()
 

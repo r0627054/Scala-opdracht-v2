@@ -4,7 +4,7 @@ import sless.ast.base.components.CssComponent
 import sless.ast.base.components.selector.SelectorComponent
 
 
-class AdjacentSelectorComponent(override val firstSelector: SelectorComponent, override val secondSelector:SelectorComponent)
+case class AdjacentSelectorComponent(override val firstSelector: SelectorComponent, override val secondSelector:SelectorComponent)
   extends CombinatorSelectorComponent(firstSelector,secondSelector){
 
   override def basic(): String = toStringCompileWithMiddleCharacter("+")

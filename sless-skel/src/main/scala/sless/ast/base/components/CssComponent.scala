@@ -13,14 +13,16 @@ class CssComponent(val rules: Seq[RuleComponent]) extends BaseComponent {
 
   override def basic(): String = {
     var result : String = ""
-    rules.foreach(r => result +=  r.basic())
+    //rules.foreach(r => result +=  r.basic())
+    replaceAllExtendedSelectors().rules.foreach(r => result +=  r.basic())
     result
   }
 
   override def pretty(spaces: Int): String = {
     var result : String = ""
-    val lastIndex : Int = if(rules.nonEmpty) rules.length - 1 else 0
-    for((rule,index) <- rules.view.zipWithIndex) {
+    val currentRules = replaceAllExtendedSelectors().rules
+    val lastIndex : Int = if(currentRules.nonEmpty) currentRules.length - 1 else 0
+    for((rule,index) <- currentRules.view.zipWithIndex) {
       result += rule.pretty(spaces)
       if(index != lastIndex) result += "\n\n"
     }
@@ -46,6 +48,14 @@ class CssComponent(val rules: Seq[RuleComponent]) extends BaseComponent {
   def replaceGivenSelectorWith(oldSelector: SelectorComponent, newSelector: SelectorComponent): Css ={
     val replacedRules: Seq[Rule] = rules.map(rule => rule.replaceGivenSelectorWith(oldSelector,newSelector))
     new CssComponent(replacedRules)
+  }
+
+  def replaceAllExtendedSelectors() : CssComponent = {
+    var currentCss : CssComponent = this
+    for(rule <- rules) {
+      currentCss = rule.extendSelectorReplacement(currentCss)
+    }
+    currentCss
   }
 
 }

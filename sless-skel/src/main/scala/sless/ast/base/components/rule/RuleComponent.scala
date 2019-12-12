@@ -4,7 +4,7 @@ import sless.ast.base.components.declaration.DeclarationComponent
 import sless.ast.base.components.selector.SelectorComponent
 import sless.ast.base.components.value.ValueComponent
 import sless.ast.base.components.value.basic.BasicValueComponent
-import sless.ast.base.components.{BaseComponent, PropertyComponent}
+import sless.ast.base.components.{BaseComponent, CssComponent, PropertyComponent}
 import sless.ast.base.enumeration.MarginType
 
 
@@ -87,6 +87,9 @@ class RuleComponent(val s: SelectorComponent, val declarations: Seq[DeclarationC
     declarations.filter(dec => dec.hasPropertyName(propertyName)).length
   }
 
+  //-----------------------
+  //----- EXTEND ----------
+  //-----------------------
 
   def replaceGivenSelectorWith(oldSelector: SelectorComponent, newSelector: SelectorComponent): Rule ={
     if(s == oldSelector){
@@ -96,5 +99,5 @@ class RuleComponent(val s: SelectorComponent, val declarations: Seq[DeclarationC
     }
   }
 
-
+  def extendSelectorReplacement(css: CssComponent): CssComponent = s.extendSelectorReplacement(css)
 }

@@ -3,7 +3,7 @@ package sless.ast.base.components.selector.combinators
 import sless.ast.base.components.CssComponent
 import sless.ast.base.components.selector.SelectorComponent
 
-class ChildSelectorComponent(override val firstSelector: SelectorComponent, override val secondSelector:SelectorComponent)
+case class ChildSelectorComponent(override val firstSelector: SelectorComponent, override val secondSelector:SelectorComponent)
   extends CombinatorSelectorComponent(firstSelector,secondSelector){
   override def basic(): String = toStringCompileWithMiddleCharacter(">")
 
