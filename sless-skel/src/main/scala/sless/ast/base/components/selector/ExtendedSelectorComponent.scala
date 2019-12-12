@@ -17,7 +17,7 @@ case class ExtendedSelectorComponent(val selector1 : SelectorComponent, val sele
     val selector1Css : CssComponent = selector1.extendSelectorReplacement(css)
 
     val extendedSelector: SelectorComponent = new GroupSelectorComponent(Seq(selector2,selector1))
-    selector1Css.replaceGivenSelectorWith(selector2,extendedSelector)
+    selector1Css.replaceGivenSelectorWith(selector2,extendedSelector).replaceGivenSelectorWith(this,selector1)
   }
 
   override def basic(): String = selector1.basic()

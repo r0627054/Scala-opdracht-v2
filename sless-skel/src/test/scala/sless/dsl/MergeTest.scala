@@ -46,7 +46,9 @@ class MergeTest extends  FunSuite{
 
     val ex = mergeSheets(ex1,ex2)
 
-
+    //heeft de eerste uit de lijst genomen
+    //die is gaan kijken of er een voorkomen rechts was, ja dit was zo -> rechts stond die ook al, niet overschreven
+    //links verwijdert
     assert(
       MergeImplementation.dsl.compile(ex) ===
         """*.class-name2{width:100%;}*.class-name1{background-color:blue;width:95%;}""")

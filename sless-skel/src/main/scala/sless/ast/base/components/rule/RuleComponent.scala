@@ -2,6 +2,8 @@ package sless.ast.base.components.rule
 
 import sless.ast.base.components.declaration.DeclarationComponent
 import sless.ast.base.components.selector.SelectorComponent
+import sless.ast.base.components.selector.constructors.GroupSelectorComponent
+import sless.ast.base.components.selector.modifiers.ModifierComponent
 import sless.ast.base.components.value.ValueComponent
 import sless.ast.base.components.value.basic.BasicValueComponent
 import sless.ast.base.components.{BaseComponent, CssComponent, PropertyComponent}
@@ -86,6 +88,10 @@ class RuleComponent(val s: SelectorComponent, val declarations: Seq[DeclarationC
     //in case a rule has multiple declarations of a certain property
     declarations.filter(dec => dec.hasPropertyName(propertyName)).length
   }
+
+  def hasGroupSelectorComponent() : Boolean = s.isInstanceOf[GroupSelectorComponent]
+
+  //def hasModifierComponent() : Boolean = s.isInstanceOf[ModifierComponent]
 
   //-----------------------
   //----- EXTEND ----------

@@ -5,7 +5,6 @@ import sless.ast.base.components.selector.SelectorComponent
 
 class CssComponent(val rules: Seq[RuleComponent]) extends BaseComponent {
 
-
   def aggregateMargins(): (Boolean, CssComponent) = {
     val (isAggregated,allRules) :(Seq[Boolean], Seq[RuleComponent])=rules.map(rule => rule.aggregateMargins()).unzip
     (isAggregated.forall(isAgg => isAgg), new CssComponent(allRules))
@@ -45,6 +44,11 @@ class CssComponent(val rules: Seq[RuleComponent]) extends BaseComponent {
     rules.map(rule => rule.numberOfDeclarationsOfPropertyWithName(propertyName)).sum
   }
 
+  //-------------------------------
+  //------- extend methods --------
+  //-------------------------------
+
+
   def replaceGivenSelectorWith(oldSelector: SelectorComponent, newSelector: SelectorComponent): Css ={
     val replacedRules: Seq[Rule] = rules.map(rule => rule.replaceGivenSelectorWith(oldSelector,newSelector))
     new CssComponent(replacedRules)
@@ -56,6 +60,36 @@ class CssComponent(val rules: Seq[RuleComponent]) extends BaseComponent {
       currentCss = rule.extendSelectorReplacement(currentCss)
     }
     currentCss
+  }
+
+  //-------------------------------
+  //-------- merge methods --------
+  //-------------------------------
+
+  def mergeSheets(tail: Seq[CssComponent]): CssComponent = {
+    if(tail.isEmpty){
+       this
+    } else {
+      //all the extended selectors are replaced
+      var currentMergedSheet : CssComponent = this.replaceAllExtendedSelectors()
+      for(sheet <- tail){
+        currentMergedSheet = mergeCssComponents(currentMergedSheet, sheet.replaceAllExtendedSelectors())
+      }
+      currentMergedSheet
+    }
+  }
+
+  //selector list are supported
+  //nested selectors are not supported
+  def mergeCssComponents(firstSheet: CssComponent, SecondSheet: CssComponent): CssComponent = {
+    for(firstSheetRule <- firstSheet.rules){
+      if(firstSheetRule.hasGroupSelectorComponent()){
+        //wanneer de linkse rule een lijst van selectors is
+        
+      } else {
+        // een enkele selector
+      }
+    }
   }
 
 }
