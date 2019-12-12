@@ -92,6 +92,7 @@ class RuleComponent(val s: SelectorComponent, val declarations: Seq[DeclarationC
   //-----------------------
 
   def replaceGivenSelectorWith(oldSelector: SelectorComponent, newSelector: SelectorComponent): Rule ={
+    // This can be compared because selectorComponent leaf classes are case classes
     if(s == oldSelector){
       new Rule(newSelector, declarations)
     }else {

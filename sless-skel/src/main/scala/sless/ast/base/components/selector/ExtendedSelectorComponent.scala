@@ -12,6 +12,8 @@ case class ExtendedSelectorComponent(val selector1 : SelectorComponent, val sele
     */
   override def extendSelectorReplacement(css: CssComponent): CssComponent = {
     //when extended selectors are chained, all the exteneded selectors have to be replaced
+    //nested extend calls to appear in s1 (but not in s2, this is a regular selector): any outer
+    //extend call extends its selector after erasing any more inward extend calls in s1
     val selector1Css : CssComponent = selector1.extendSelectorReplacement(css)
 
     val extendedSelector: SelectorComponent = new GroupSelectorComponent(Seq(selector2,selector1))
