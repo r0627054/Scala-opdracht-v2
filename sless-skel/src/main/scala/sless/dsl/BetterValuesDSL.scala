@@ -2,6 +2,9 @@ package sless.dsl
 
 trait BetterValuesDSL extends ValueDSL {
 
+  def inherit: Value
+  def auto: Value
+
   def Margin(value1: Value) : Value
   def Margin(value1: Value,value2: Value) : Value
   def Margin(value1: Value,value2: Value,value3: Value) : Value

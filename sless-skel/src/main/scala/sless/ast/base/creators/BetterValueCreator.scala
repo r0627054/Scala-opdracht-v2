@@ -2,7 +2,7 @@ package sless.ast.base.creators
 
 import sless.ast.base.BaseAST
 import sless.ast.base.components.value.ValueComponent
-import sless.ast.base.components.value.basic.{CentiMeterValueComponent, EmValueComponent, ExValueComponent, InchesValueComponent, MilliMeterValueComponent, PercentageValueComponent, PicasValueComponent, PixelUnitValueComponent, PointsValueComponent}
+import sless.ast.base.components.value.basic.{AutoValueComponent, CentiMeterValueComponent, EmValueComponent, ExValueComponent, InchesValueComponent, InheritValueComponent, MilliMeterValueComponent, PercentageValueComponent, PicasValueComponent, PixelUnitValueComponent, PointsValueComponent}
 import sless.ast.base.components.value.prop.specific.MarginValueComponent
 import sless.dsl.BetterValuesDSL
 
@@ -12,6 +12,8 @@ trait BetterValueCreator extends BaseAST with BetterValuesDSL  {
   override def Margin(value1: Value,value2: Value,value3: Value) : Value = new MarginValueComponent(value1,value2,value3)
   override def Margin(value1: Value,value2: Value,value3: Value,value4: Value) : Value = new MarginValueComponent(value1,value2,value3,value4)
 
+  def inherit: Value = new InheritValueComponent()
+  def auto: Value    = new AutoValueComponent()
 
   override protected def createPixelValue(pixels: Double) : Value   =  PixelUnitValueComponent(pixels)
   override protected def createPicasValue(picas: Double) : Value    =  PicasValueComponent(picas)
