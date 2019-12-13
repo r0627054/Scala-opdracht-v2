@@ -2,6 +2,7 @@ package sless.ast.base.components
 
 import sless.ast.base.components.rule.RuleComponent
 import sless.ast.base.components.selector.SelectorComponent
+import sless.ast.base.components.selector.constructors.AllSelectorComponent
 
 class CssComponent(val rules: Seq[RuleComponent]) extends BaseComponent {
 
@@ -81,14 +82,45 @@ class CssComponent(val rules: Seq[RuleComponent]) extends BaseComponent {
 
   //selector list are supported
   //nested selectors are not supported
-  def mergeCssComponents(firstSheet: CssComponent, SecondSheet: CssComponent): CssComponent = {
-    for(firstSheetRule <- firstSheet.rules){
+  //als er unieke declaraties zijn bij een propertie zijn zet deze dan bij de rechtse
+  //als er dubbele declaraties zijn bij een propertie behoud de rechtse
+  def mergeCssComponents(firstSheet: CssComponent, secondSheet: CssComponent): CssComponent = {
+    /*for(firstSheetRule <- firstSheet.rules){
       if(firstSheetRule.hasGroupSelectorComponent()){
         //wanneer de linkse rule een lijst van selectors is
-        
+
       } else {
         // een enkele selector
       }
+    }*/
+    var newLeftRules : Seq[RuleComponent] = Seq()
+    for(firstSheetRule <- firstSheet.rules){
+      newLeftRules = newLeftRules ++ firstSheetRule.mergeInSheet(secondSheet)
+    }
+    plainMerge(new CssComponent(newLeftRules),secondSheet)
+  }
+
+  def plainMerge(firstSheet: CssComponent, secondSheet: CssComponent): CssComponent = {
+    new CssComponent(firstSheet.rules ++ secondSheet.rules)
+  }
+
+  def hasSameSelector(sel: Selector) : Boolean = {
+    rules.map(rule => rule.hasSameSelector(sel)).contains(true)
+  }
+
+  def getRuleOfSelector(sel: Selector) : RuleComponent = {
+    var hasResult : Boolean = false
+    var ruleResult : RuleComponent = new RuleComponent(new AllSelectorComponent(),Seq())
+    for(rule <- rules){
+      if(rule.hasSameSelector(sel)){
+        hasResult = true
+        ruleResult =rule
+      }
+    }
+    if(!hasResult){
+      throw new IllegalArgumentException("Only returns a rule when the selector exists")
+    } else {
+      ruleResult
     }
   }
 

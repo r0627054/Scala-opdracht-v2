@@ -5,11 +5,11 @@ import sless.ast.base.components.CssComponent
 import sless.ast.base.components.declaration.DeclarationComponent
 import sless.ast.base.components.selector.SelectorComponent
 
-class RuleWithCommentComponent(override val s: SelectorComponent, override val declarations: Seq[DeclarationComponent], val comment: String)
-  extends RuleComponent(s,declarations) with CommentFormat {
+class RuleWithCommentComponent(override val selector: SelectorComponent, declarations: Seq[DeclarationComponent], val comment: String)
+  extends RuleComponent(selector,declarations) with CommentFormat {
 
   def this(ruleComponent: RuleComponent, comment: String) {
-    this(ruleComponent.s,ruleComponent.declarations,comment)
+    this(ruleComponent.selector,ruleComponent.declarations,comment)
   }
 
   override def basic(): String = {
