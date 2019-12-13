@@ -122,29 +122,34 @@ class RuleComponent(val selector: SelectorComponent, var declarations: Seq[Decla
 
   def mergeInSheet(secondSheet: CssComponent): Seq[RuleComponent] = {
         if(secondSheet.hasSameSelector(this.selector)){
-          //has identical group selector
+          //has identical selector
             val matchingRightRule : RuleComponent = secondSheet.getRuleOfSelector(this.selector)
             val leftOverDeclarations : Seq[DeclarationComponent] = matchingRightRule.mergeInDeclarations(this.declarations)
-            if(leftOverDeclarations.isEmpty){
-              Seq()
-            } else {
-              Seq(new RuleComponent(this.selector,leftOverDeclarations))
-            }
+          Seq()
         }else if(this.hasGroupSelectorComponent()){
           //When this is a group selector component
-
-
+          val castedGroup : GroupSelectorComponent = selector.asInstanceOf[GroupSelectorComponent]
+          val allSelectors : Seq[SelectorComponent] = castedGroup.selectors
+          var newSelectors : Seq[SelectorComponent] = Seq()
+          for(currentSelector <- allSelectors) {
+            //iterate over all selectors in group
+             if(secondSheet.hasSameSelector(currentSelector)){
+               //second sheet has the same selector as the current selector in the group
+               val matchingRightRule : RuleComponent = secondSheet.getRuleOfSelector(currentSelector)
+               matchingRightRule.mergeInDeclarations(this.declarations)
+             } else {
+               newSelectors = newSelectors :+ currentSelector
+             }
+          }
+          if(newSelectors.nonEmpty){
+            Seq(new RuleComponent(new GroupSelectorComponent(newSelectors),this.declarations))
+          }else {
+            Seq()
+          }
         } else {
-          //Has no other occurrences
           Seq(this)
         }
 
-
-
-
-
-
-      //}
   }
 
   def addDeclaration(declaration: DeclarationComponent) : Unit = {
@@ -154,7 +159,7 @@ class RuleComponent(val selector: SelectorComponent, var declarations: Seq[Decla
   def mergeInDeclarations(newDeclarations: Seq[DeclarationComponent]) : Seq[DeclarationComponent] = {
     var uniqueDeclarations : Seq[DeclarationComponent] = Seq()
     for(declaration <- newDeclarations){
-      if(!this.hasDeclarationWithPropertyName(declaration.getStringValue())){
+      if(!this.hasDeclarationWithPropertyName(declaration.getPropertyName())){
         //if it has not a declaration, just add the declaration to it
         this.addDeclaration(declaration)
       }else {

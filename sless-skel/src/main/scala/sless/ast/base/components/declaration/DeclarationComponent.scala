@@ -30,4 +30,6 @@ class DeclarationComponent(val prop: PropertyComponent, val value: ValueComponen
     prop.equalsPropertyName(name)
   }
 
+  def getPropertyName() : String = prop.getPropertyName()
+
 }

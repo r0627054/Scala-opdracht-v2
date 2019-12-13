@@ -23,4 +23,6 @@ class PropertyComponent(val propertyName: String) extends BaseComponent {
     name == propertyName
   }
 
+  def getPropertyName() : String = propertyName
+
 }
