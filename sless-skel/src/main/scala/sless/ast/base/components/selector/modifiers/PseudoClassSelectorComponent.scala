@@ -11,4 +11,8 @@ case class PseudoClassSelectorComponent(override val selector: SelectorComponent
   override def pretty(spaces: Int): String = super.pretty(spaces) + pseudoClassSelectorToString()
 
   def pseudoClassSelectorToString() : String = ":" + string
+
+  override def replaceParentWithSelectorComponent(parentSelector: SelectorComponent): SelectorComponent = {
+    new PseudoClassSelectorComponent(selector.replaceParentWithSelectorComponent(parentSelector),string)
+  }
 }

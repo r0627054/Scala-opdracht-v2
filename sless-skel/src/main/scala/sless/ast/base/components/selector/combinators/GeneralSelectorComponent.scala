@@ -9,4 +9,6 @@ case class GeneralSelectorComponent(override val firstSelector: SelectorComponen
   override def basic(): String = toStringCompileWithMiddleCharacter("~")
 
   override def pretty(spaces: Int): String = toStringPrettyMiddleCharacterWithExtraSpaces("~", spaces)
+
+  override def replaceParentWithSelectorComponent(parentSelector: SelectorComponent): SelectorComponent = {}
 }

@@ -9,4 +9,7 @@ case class ClassNameSelectorComponent(override val selector: SelectorComponent, 
 
   override def pretty(spaces: Int): String = super.pretty(spaces) + "." + string
 
+  override def replaceParentWithSelectorComponent(parentSelector: SelectorComponent): SelectorComponent = {
+    new ClassNameSelectorComponent(selector.replaceParentWithSelectorComponent(parentSelector),string)
+  }
 }

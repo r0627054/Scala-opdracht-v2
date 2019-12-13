@@ -13,4 +13,7 @@ trait SelectorComponent extends BaseComponent {
     * @return The new CSS component where the selector is replaced
     */
   def extendSelectorReplacement(css: CssComponent): CssComponent
+
+  //return a new selectorComponent
+  def replaceParentWithSelectorComponent(parentSelector: SelectorComponent) : SelectorComponent
 }

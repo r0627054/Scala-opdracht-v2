@@ -37,4 +37,8 @@ case class GroupSelectorComponent(val selectors: Seq[SelectorComponent]) extends
     }
     currentCss
   }
+
+  override def replaceParentWithSelectorComponent(parentSelector: SelectorComponent): SelectorComponent = {
+    new GroupSelectorComponent(selectors.map(selector => selector.replaceParentWithSelectorComponent(parentSelector)))
+  }
 }

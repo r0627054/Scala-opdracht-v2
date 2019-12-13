@@ -11,5 +11,7 @@ case class IdSelectorComponent(override val selector: SelectorComponent, overrid
 
   def toStringIdSelector() : String = "#" + string
 
-
+  override def replaceParentWithSelectorComponent(parentSelector: SelectorComponent): SelectorComponent = {
+    new IdSelectorComponent(selector.replaceParentWithSelectorComponent(parentSelector),string)
+  }
 }

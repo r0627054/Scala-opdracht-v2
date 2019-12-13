@@ -96,8 +96,6 @@ class RuleComponent(val selector: SelectorComponent, var declarations: Seq[Decla
 
   def hasGroupSelectorComponent() : Boolean = selector.isInstanceOf[GroupSelectorComponent]
 
-  //def hasModifierComponent() : Boolean = s.isInstanceOf[ModifierComponent]
-
   //-----------------------
   //----- EXTEND ----------
   //-----------------------
@@ -112,7 +110,6 @@ class RuleComponent(val selector: SelectorComponent, var declarations: Seq[Decla
   }
 
   def extendSelectorReplacement(css: CssComponent): CssComponent = selector.extendSelectorReplacement(css)
-
 
   //----------------------
   //------- MERGE --------
@@ -168,6 +165,4 @@ class RuleComponent(val selector: SelectorComponent, var declarations: Seq[Decla
     }
     uniqueDeclarations
   }
-
-
 }

@@ -2,7 +2,7 @@ package sless.ast.base.components.selector
 import sless.ast.base.components.CssComponent
 import sless.ast.base.components.selector.constructors.GroupSelectorComponent
 
-case class ExtendedSelectorComponent(val selector1 : SelectorComponent, val selector2: SelectorComponent) extends SelectorComponent {
+case class ExtendedSelectorComponent(selector1 : SelectorComponent, selector2: SelectorComponent) extends SelectorComponent {
 
   /**
     * First creates the new group selector.
@@ -24,5 +24,6 @@ case class ExtendedSelectorComponent(val selector1 : SelectorComponent, val sele
 
   override def pretty(spaces: Int): String = selector1.pretty(spaces)
 
-
+  override def replaceParentWithSelectorComponent(parentSelector: SelectorComponent): SelectorComponent =  new ExtendedSelectorComponent(selector1.replaceParentWithSelectorComponent(parentSelector),selector2.replaceParentWithSelectorComponent(parentSelector))
+  
 }

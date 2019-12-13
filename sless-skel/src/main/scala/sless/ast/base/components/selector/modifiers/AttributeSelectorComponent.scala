@@ -10,4 +10,7 @@ case class AttributeSelectorComponent(override val selector: SelectorComponent, 
 
   override def pretty(spaces: Int): String = super.pretty(spaces) + "[" + string + "=\"" + value.pretty(spaces) + "\"]"
 
+  override def replaceParentWithSelectorComponent(parentSelector: SelectorComponent): SelectorComponent = {
+    new AttributeSelectorComponent(selector.replaceParentWithSelectorComponent(parentSelector),string,value)
+  }
 }

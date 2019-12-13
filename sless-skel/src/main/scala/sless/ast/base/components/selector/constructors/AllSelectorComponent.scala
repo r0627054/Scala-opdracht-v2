@@ -18,4 +18,6 @@ case class AllSelectorComponent() extends SelectorComponent {
     * @return The new CSS component where the selector is replaced
     */
   override def extendSelectorReplacement(css: CssComponent): CssComponent = css
+
+  override def replaceParentWithSelectorComponent(parentSelector: SelectorComponent): SelectorComponent = this
 }
