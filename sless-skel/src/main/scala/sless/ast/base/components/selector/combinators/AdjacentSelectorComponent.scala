@@ -10,4 +10,8 @@ case class AdjacentSelectorComponent(override val firstSelector: SelectorCompone
   override def basic(): String = toStringCompileWithMiddleCharacter("+")
 
   override def pretty(spaces: Int): String = toStringPrettyMiddleCharacterWithExtraSpaces("+",spaces)
+
+  override def replaceParentWithSelectorComponent(parentSelector: SelectorComponent): SelectorComponent = {
+    new AdjacentSelectorComponent(firstSelector.replaceParentWithSelectorComponent(parentSelector),secondSelector.replaceParentWithSelectorComponent(parentSelector))
+  }
 }

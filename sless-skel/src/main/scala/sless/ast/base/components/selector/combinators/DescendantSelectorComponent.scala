@@ -7,4 +7,8 @@ case class DescendantSelectorComponent(override val firstSelector: SelectorCompo
   override def basic(): String = toStringCompileWithMiddleCharacter(" ")
 
   override def pretty(spaces: Int): String = toStringPrettyMiddleCharacterWithoutExtraSpaces(" ",spaces)
+
+  override def replaceParentWithSelectorComponent(parentSelector: SelectorComponent): SelectorComponent = {
+    new DescendantSelectorComponent(firstSelector.replaceParentWithSelectorComponent(parentSelector),secondSelector.replaceParentWithSelectorComponent(parentSelector))
+  }
 }

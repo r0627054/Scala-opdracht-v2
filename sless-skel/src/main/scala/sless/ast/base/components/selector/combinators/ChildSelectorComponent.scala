@@ -8,4 +8,8 @@ case class ChildSelectorComponent(override val firstSelector: SelectorComponent,
   override def basic(): String = toStringCompileWithMiddleCharacter(">")
 
   override def pretty(spaces: Int): String = toStringPrettyMiddleCharacterWithExtraSpaces(">",spaces)
+
+  override def replaceParentWithSelectorComponent(parentSelector: SelectorComponent): SelectorComponent = {
+    new ChildSelectorComponent(firstSelector.replaceParentWithSelectorComponent(parentSelector),secondSelector.replaceParentWithSelectorComponent(parentSelector))
+  }
 }

@@ -10,5 +10,7 @@ case class GeneralSelectorComponent(override val firstSelector: SelectorComponen
 
   override def pretty(spaces: Int): String = toStringPrettyMiddleCharacterWithExtraSpaces("~", spaces)
 
-  override def replaceParentWithSelectorComponent(parentSelector: SelectorComponent): SelectorComponent = {}
+  override def replaceParentWithSelectorComponent(parentSelector: SelectorComponent): SelectorComponent = {
+    new GeneralSelectorComponent(firstSelector.replaceParentWithSelectorComponent(parentSelector),secondSelector.replaceParentWithSelectorComponent(parentSelector))
+  }
 }
