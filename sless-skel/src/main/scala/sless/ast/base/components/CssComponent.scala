@@ -56,6 +56,8 @@ class CssComponent(val rules: Seq[RuleComponent]) extends BaseComponent {
   }
 
   def replaceAllExtendedSelectors() : CssComponent = {
+
+    //TODO needs to have basic css
     var currentCss : CssComponent = this
     for(rule <- rules) {
       currentCss = rule.extendSelectorReplacement(currentCss)
@@ -123,5 +125,18 @@ class CssComponent(val rules: Seq[RuleComponent]) extends BaseComponent {
       ruleResult
     }
   }
+
+  //-------------------------
+  //-------NESTED -----------
+  //-------------------------
+
+
+  def toBasicComponents() : CssComponent = {
+      val rulesMadeOfBasicComponents : Seq[RuleComponent] = rules.map(rule => rule.toBasicComponents()).flatten
+      new CssComponent(rulesMadeOfBasicComponents)
+  }
+
+
+
 
 }

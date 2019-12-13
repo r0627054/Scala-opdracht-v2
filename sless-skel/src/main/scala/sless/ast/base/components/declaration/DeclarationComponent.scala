@@ -1,11 +1,11 @@
 package sless.ast.base.components.declaration
 
 import sless.ast.base.components.value.ValueComponent
-import sless.ast.base.components.{BaseComponent, CssComponent, PropertyComponent}
+import sless.ast.base.components.{BaseComponent, CssComponent, PropertyComponent, RuleOrDeclarationComponent}
 import sless.ast.base.enumeration.MarginType
 
 
-class DeclarationComponent(val prop: PropertyComponent, val value: ValueComponent) extends BaseComponent {
+class DeclarationComponent(val prop: PropertyComponent, val value: ValueComponent) extends RuleOrDeclarationComponent {
   override def basic(): String = {
     prop.basic() + ":" + value.basic() + ";"
   }

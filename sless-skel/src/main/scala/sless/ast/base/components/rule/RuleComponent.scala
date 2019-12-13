@@ -6,13 +6,10 @@ import sless.ast.base.components.selector.constructors.GroupSelectorComponent
 import sless.ast.base.components.selector.modifiers.ModifierComponent
 import sless.ast.base.components.value.ValueComponent
 import sless.ast.base.components.value.basic.BasicValueComponent
-import sless.ast.base.components.{BaseComponent, CssComponent, PropertyComponent}
+import sless.ast.base.components.{BaseComponent, CssComponent, PropertyComponent, RuleOrDeclarationComponent}
 import sless.ast.base.enumeration.MarginType
 
-import scala.collection.GenTraversableOnce
-
-
-class RuleComponent(val selector: SelectorComponent, var declarations: Seq[DeclarationComponent]) extends BaseComponent {
+class RuleComponent(val selector: SelectorComponent, var declarations: Seq[RuleOrDeclarationComponent]) extends RuleOrDeclarationComponent {
 
   override def basic(): String = {
     var result: String = selector.basic() + "{"
@@ -165,4 +162,38 @@ class RuleComponent(val selector: SelectorComponent, var declarations: Seq[Decla
     }
     uniqueDeclarations
   }
+
+  /**
+    * One rule component with nested selectors can contain multiple "basic" rule components.
+    * This method transforms the rule component to a Seq of "basic" rule components.
+    * This method is called on the most outer rule component(s) because it currently cannot have a parent component.
+    * On the more inner components the "toBasicComponents(parent)" is called.
+    * @return
+    */
+  def toBasicComponents(): Seq[RuleComponent] = {
+    //this Seq contains the basic rules and the declarations of the current rule
+    val plainDeclarationsOfCurrentRule : Seq[RuleOrDeclarationComponent] = getPlainDeclarationOfCurrentRule()
+    if(plainDeclarationsOfCurrentRule.isEmpty)  getInnerRules() else new RuleComponent(selector,plainDeclarationsOfCurrentRule) +: getInnerRules()
+  }
+
+  def toBasicComponents(currentParentSelector: SelectorComponent) : Seq[RuleOrDeclarationComponent] = {
+    //TODO 
+  }
+
+
+
+  protected def getPlainDeclarationOfCurrentRule(): Seq[RuleOrDeclarationComponent] = {
+    basicComponentWhereParentsRemoved().filter(rd => rd.isDeclarationComponent())
+  }
+
+
+  protected def getInnerRules() : Seq[RuleComponent] = {
+    basicComponentWhereParentsRemoved().filter(rd => rd.isRuleComponent()).asInstanceOf[Seq[RuleComponent]]
+  }
+
+  private def basicComponentWhereParentsRemoved() : Seq[RuleOrDeclarationComponent] = {
+    declarations.map(declaration => declaration.toBasicComponents(selector)).flatten
+  }
+
+
 }
