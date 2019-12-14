@@ -17,7 +17,7 @@ trait Printable {
   /**
     * Prints the component pretty. The component contains spaces and newlines to pretty print.
     *
-    * @param spaces The number of spaces places before a declaration.
+    * @param spaces The number of spaces placed before a declaration.
     * @return The pretty print string of the component
     */
   def pretty(spaces: Int): String
