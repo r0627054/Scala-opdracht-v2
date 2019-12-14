@@ -16,14 +16,14 @@ abstract class ValueComponent extends BaseComponent {
     *
     * @return The string representation of the value.
     */
-  def getStringValue(): String
+  def getStringValue: String
 
   /**
     * Returns the basic representation of the value. By default is this the same as "getStringValue".
     *
     * @return The basic print string of the component.
     */
-  override def basic(): String = getStringValue()
+  override def basic(): String = getStringValue
 
   /**
     * Returns the pretty representation of the value. By default is this the same as "getStringValue".
@@ -31,5 +31,5 @@ abstract class ValueComponent extends BaseComponent {
     * @param spaces The number of spaces placed before a declaration.
     * @return The pretty print string of the component
     */
-  override def pretty(spaces: Int): String = getStringValue()
+  override def pretty(spaces: Int): String = getStringValue
 }

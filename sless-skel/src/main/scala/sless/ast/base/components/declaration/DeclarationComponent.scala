@@ -25,18 +25,18 @@ class DeclarationComponent(val prop: PropertyComponent, val value: ValueComponen
   }
 
   def getMarginPosition: MarginType.Value = {
-    prop.getMarginPosition()
+    prop.getMarginPosition
   }
 
   def getStringValue: String = {
-    value.getStringValue()
+    value.getStringValue
   }
 
   def hasPropertyName(name: String) : Boolean = {
     prop.equalsPropertyName(name)
   }
 
-  def getPropertyName: String = prop.getPropertyName()
+  def getPropertyName: String = prop.getPropertyName
 
   override def toBasicComponents(currentParentSelector: SelectorComponent): Seq[RuleOrDeclarationComponent] = Seq(this)
 }

@@ -4,10 +4,9 @@ import sless.ast.base.components.declaration.DeclarationComponent
 import sless.ast.base.components.selector.SelectorComponent
 import sless.ast.base.components.selector.combinators.DescendantSelectorComponent
 import sless.ast.base.components.selector.constructors.GroupSelectorComponent
-import sless.ast.base.components.selector.modifiers.ModifierComponent
 import sless.ast.base.components.value.ValueComponent
 import sless.ast.base.components.value.basic.BasicValueComponent
-import sless.ast.base.components.{BaseComponent, CssComponent, PropertyComponent, RuleOrDeclarationComponent}
+import sless.ast.base.components.{ CssComponent, PropertyComponent, RuleOrDeclarationComponent}
 import sless.ast.base.enumeration.MarginType
 
 class RuleComponent(val selector: SelectorComponent, var declarations: Seq[RuleOrDeclarationComponent]) extends RuleOrDeclarationComponent {
@@ -57,7 +56,7 @@ class RuleComponent(val selector: SelectorComponent, var declarations: Seq[RuleO
       for(declaration <- basicDeclarations){
         if(declaration.containsMarginProperty()){
           var index : Int = 0
-            declaration.getMarginPosition() match {
+            declaration.getMarginPosition match {
               case MarginType.top    => index = 0
               case MarginType.right  => index = 1
               case MarginType.bottom => index = 2
@@ -74,7 +73,7 @@ class RuleComponent(val selector: SelectorComponent, var declarations: Seq[RuleO
 
   private def replaceMargins(margins: Array[ValueComponent]): RuleComponent = {
     var isFirst : Boolean= true
-    val marginAggregate : String = margins.map(valCom => valCom.getStringValue()).mkString(" ")
+    val marginAggregate : String = margins.map(valCom => valCom.getStringValue).mkString(" ")
     var newDeclarations: Seq[DeclarationComponent] = Seq()
     for(declaration <- declarations.asInstanceOf[Seq[DeclarationComponent]]){
       if(declaration.containsMarginProperty()){
@@ -160,7 +159,7 @@ class RuleComponent(val selector: SelectorComponent, var declarations: Seq[RuleO
   def mergeInDeclarations(newDeclarations: Seq[DeclarationComponent]) : Seq[DeclarationComponent] = {
     var uniqueDeclarations : Seq[DeclarationComponent] = Seq()
     for(declaration <- newDeclarations){
-      if(!this.hasDeclarationWithPropertyName(declaration.getPropertyName())){
+      if(!this.hasDeclarationWithPropertyName(declaration.getPropertyName)){
         //if it has not a declaration, just add the declaration to it
         this.addDeclaration(declaration)
       }else {
@@ -209,11 +208,11 @@ class RuleComponent(val selector: SelectorComponent, var declarations: Seq[RuleO
   }
 
   protected def getPlainDeclarationOfCurrentRule(sel: SelectorComponent): Seq[RuleOrDeclarationComponent] = {
-    basicComponentWhereParentsRemoved(sel).filter(rd => rd.isDeclarationComponent())
+    basicComponentWhereParentsRemoved(sel).filter(rd => rd.isDeclarationComponent)
   }
 
   protected def getInnerRules(sel: SelectorComponent) : Seq[RuleComponent] = {
-    basicComponentWhereParentsRemoved(sel).filter(rd => rd.isRuleComponent()).asInstanceOf[Seq[RuleComponent]]
+    basicComponentWhereParentsRemoved(sel).filter(rd => rd.isRuleComponent).asInstanceOf[Seq[RuleComponent]]
   }
 
   private def basicComponentWhereParentsRemoved(sel: SelectorComponent) : Seq[RuleOrDeclarationComponent] = {
