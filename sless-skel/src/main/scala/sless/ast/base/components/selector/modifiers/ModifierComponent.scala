@@ -14,4 +14,7 @@ abstract class ModifierComponent(val selector: SelectorComponent, val string: St
     * @return The new CSS component where the selector is replaced
     */
   override def extendSelectorReplacement(css: CssComponent): CssComponent = selector.extendSelectorReplacement(css)
+
+  override def hasParentSelectorComponent(): Boolean = selector.hasParentSelectorComponent()
+
 }

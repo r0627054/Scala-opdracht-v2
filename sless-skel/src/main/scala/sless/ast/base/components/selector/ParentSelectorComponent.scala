@@ -15,4 +15,6 @@ case class ParentSelectorComponent() extends SelectorComponent {
 
   //the actual replacement
   override def replaceParentWithSelectorComponent(parentSelector: SelectorComponent): SelectorComponent = parentSelector
+
+  override def hasParentSelectorComponent(): Boolean = true
 }

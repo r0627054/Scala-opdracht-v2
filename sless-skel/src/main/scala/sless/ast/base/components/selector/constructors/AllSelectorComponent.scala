@@ -20,4 +20,6 @@ case class AllSelectorComponent() extends SelectorComponent {
   override def extendSelectorReplacement(css: CssComponent): CssComponent = css
 
   override def replaceParentWithSelectorComponent(parentSelector: SelectorComponent): SelectorComponent = this
+
+  override def hasParentSelectorComponent(): Boolean = false
 }

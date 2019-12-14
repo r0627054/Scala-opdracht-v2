@@ -2,6 +2,7 @@ package sless.ast.base.components.rule
 
 import sless.ast.base.components.declaration.DeclarationComponent
 import sless.ast.base.components.selector.SelectorComponent
+import sless.ast.base.components.selector.combinators.DescendantSelectorComponent
 import sless.ast.base.components.selector.constructors.GroupSelectorComponent
 import sless.ast.base.components.selector.modifiers.ModifierComponent
 import sless.ast.base.components.value.ValueComponent
@@ -173,7 +174,12 @@ class RuleComponent(val selector: SelectorComponent, var declarations: Seq[RuleO
 
 
   def replaceParentWithSelectorComponent(parentSelector: SelectorComponent) : SelectorComponent = {
-    selector.replaceParentWithSelectorComponent(parentSelector)
+    //TODO nakijken of dit klopt
+    if(this.hasParentSelectorComponent()){
+      selector.replaceParentWithSelectorComponent(parentSelector)
+    }else{
+      new DescendantSelectorComponent(parentSelector,selector)
+    }
   }
 
   /**
@@ -219,6 +225,9 @@ class RuleComponent(val selector: SelectorComponent, var declarations: Seq[RuleO
     declarations.exists(dec => dec.containsMarginProperty())
   }
 
+  def hasParentSelectorComponent() : Boolean = {
+    selector.hasParentSelectorComponent()
+  }
 
 
 

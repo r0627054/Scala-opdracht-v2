@@ -19,5 +19,6 @@ abstract class CombinatorSelectorComponent(val firstSelector: SelectorComponent,
     firstSelector.extendSelectorReplacement(rightCss)
   }
 
+  override def hasParentSelectorComponent(): Boolean = firstSelector.hasParentSelectorComponent() || secondSelector.hasParentSelectorComponent()
 
 }

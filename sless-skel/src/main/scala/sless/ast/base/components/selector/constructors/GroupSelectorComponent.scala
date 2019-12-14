@@ -41,4 +41,6 @@ case class GroupSelectorComponent(val selectors: Seq[SelectorComponent]) extends
   override def replaceParentWithSelectorComponent(parentSelector: SelectorComponent): SelectorComponent = {
     new GroupSelectorComponent(selectors.map(selector => selector.replaceParentWithSelectorComponent(parentSelector)))
   }
+
+  override def hasParentSelectorComponent(): Boolean = selectors.exists(sel => sel.hasParentSelectorComponent())
 }
