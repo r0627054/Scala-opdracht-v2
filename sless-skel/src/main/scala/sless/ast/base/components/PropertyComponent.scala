@@ -40,7 +40,7 @@ class PropertyComponent(val propertyName: String) extends BaseComponent {
     * @throws IllegalArgumentException When this property is not a margin property.
     * @return the margin Type of the property.
     */
-  def getMarginPosition(): MarginType.Value = {
+  def getMarginPosition: MarginType.Value = {
     if (!this.containsMarginProperty()) {
       throw new IllegalArgumentException("This is not a margin property!")
     }
@@ -62,6 +62,6 @@ class PropertyComponent(val propertyName: String) extends BaseComponent {
     *
     * @return The name of the property.
     */
-  def getPropertyName(): String = propertyName
+  def getPropertyName: String = propertyName
 
 }
