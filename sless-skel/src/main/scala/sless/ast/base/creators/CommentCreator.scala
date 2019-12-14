@@ -5,12 +5,11 @@ import sless.ast.base.components.declaration.{DeclarationComponent, DeclarationW
 import sless.ast.base.components.rule.{RuleComponent, RuleWithCommentComponent}
 import sless.dsl.CommentDSL
 
-trait CommentCreator extends BaseAST with CommentDSL{
-  override protected def commentRule(rule: RuleComponent, str: String): RuleComponent = {
-      new RuleWithCommentComponent(rule,str)
-  }
+/**
+  * A comment creator is a creator class which implements the CommentDSL methods.
+  */
+trait CommentCreator extends BaseAST with CommentDSL {
+  override protected def commentRule(rule: RuleComponent, str: String): RuleComponent = new RuleWithCommentComponent(rule, str)
 
-  override protected def commentDeclaration(declaration: DeclarationComponent, str: String): DeclarationComponent = {
-      new DeclarationWithCommentComponent(declaration,str)
-  }
+  override protected def commentDeclaration(declaration: DeclarationComponent, str: String): DeclarationComponent = new DeclarationWithCommentComponent(declaration, str)
 }

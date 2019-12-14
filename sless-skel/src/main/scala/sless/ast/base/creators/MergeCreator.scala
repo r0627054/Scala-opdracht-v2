@@ -4,12 +4,15 @@ import sless.ast.base.BaseAST
 import sless.ast.base.components.CssComponent
 import sless.dsl.MergeDSL
 
-trait MergeCreator extends BaseAST with MergeDSL  {
-  def mergeSheets(cssSheets : Css*) : Css = {
+/**
+  * A merge creator is a creator class which implements the MergeDSL methods.
+  */
+trait MergeCreator extends BaseAST with MergeDSL {
+  def mergeSheets(cssSheets: Css*): Css = {
     val allCssSheets = cssSheets.toSeq
-    if(allCssSheets.isEmpty){
+    if (allCssSheets.isEmpty) {
       new CssComponent(Seq())
-    }else{
+    } else {
       allCssSheets.head.mergeSheets(allCssSheets.tail)
     }
   }

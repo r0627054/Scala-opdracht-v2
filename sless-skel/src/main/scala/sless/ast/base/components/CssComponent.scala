@@ -34,7 +34,7 @@ class CssComponent(val rules: Seq[RuleComponent]) extends BaseComponent {
   }
 
   def hasAnEmptyRule: Boolean = {
-    getBasicRulesOfCss.exists(r => r.hasNoDeclarations)
+    rules.exists(r => r.hasNoDeclarations)
   }
 
   def removeEmptyRules(): (Boolean, CssComponent) = {

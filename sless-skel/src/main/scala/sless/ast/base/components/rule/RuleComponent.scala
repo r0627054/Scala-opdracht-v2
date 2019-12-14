@@ -38,20 +38,22 @@ class RuleComponent(val selector: SelectorComponent, var declarations: Seq[RuleO
   //------------------------------------
 
   def aggregateMargins(): (Boolean,RuleComponent) = {
-    val (hasAll,margins) : (Boolean,Array[ValueComponent])  = hasAllMarginPositions
-    if(hasAll){
-      (true,replaceMargins(margins))
-    } else {
-      (false,this)
-    }
+     val (hasAll,margins) : (Boolean,Array[ValueComponent])  = hasAllMarginPositions
+     if(hasAll){
+       (true,replaceMargins(margins))
+     } else {
+       (false,this)
+     }
   }
 
   private def hasAllMarginPositions: (Boolean,Array[ValueComponent]) = {
     //(top,right,bottom,left)
+
     val boolResult : Array [Boolean] =   new Array[Boolean](4)
     val marginValues : Array[ValueComponent] = new Array[ValueComponent](4)
     //must consist of basic components
     val basicDeclarations : Seq[DeclarationComponent] = getBasicDeclarations()
+
       for(declaration <- basicDeclarations){
         if(declaration.containsMarginProperty()){
           var index : Int = 0
@@ -65,7 +67,9 @@ class RuleComponent(val selector: SelectorComponent, var declarations: Seq[RuleO
           marginValues(index) = declaration.value
         }
       }
+
     (boolResult.forall(p => p), marginValues)
+
   }
 
   private def replaceMargins(margins: Array[ValueComponent]): RuleComponent = {
@@ -218,7 +222,7 @@ class RuleComponent(val selector: SelectorComponent, var declarations: Seq[RuleO
 
 
   private def getBasicDeclarations(): Seq[DeclarationComponent] = {
-    toBasicComponents().asInstanceOf[Seq[DeclarationComponent]]
+    toBasicComponents().head.declarations.asInstanceOf[Seq[DeclarationComponent]]
   }
 
   override def containsMarginProperty(): Boolean = {
