@@ -20,12 +20,9 @@ class RuleWithCommentComponent(override val selector: SelectorComponent, declara
     format(comment) + "\n" + super.pretty(spaces)
   }
 
-  // TODO schrijf een tobasic method
-  override def toBasicComponents(): Seq[RuleComponent] = {
-    //this Seq contains the basic rules and the declarations of the current rule
-    val plainDeclarationsOfCurrentRule : Seq[RuleOrDeclarationComponent] = getPlainDeclarationOfCurrentRule()
-    if(plainDeclarationsOfCurrentRule.isEmpty)  getInnerRules() else new RuleWithCommentComponent(selector,plainDeclarationsOfCurrentRule,comment) +: getInnerRules()
+  override protected def toBasicComponentsHelper(sel: SelectorComponent) : Seq[RuleComponent] = {
+    val plainDeclarationsOfCurrentRule : Seq[RuleOrDeclarationComponent] = getPlainDeclarationOfCurrentRule(sel)
+    if(plainDeclarationsOfCurrentRule.isEmpty)  getInnerRules(sel) else new RuleWithCommentComponent(sel,plainDeclarationsOfCurrentRule,comment) +: getInnerRules(sel)
   }
-
 
 }

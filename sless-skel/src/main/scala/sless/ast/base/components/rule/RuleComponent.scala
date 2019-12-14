@@ -49,7 +49,9 @@ class RuleComponent(val selector: SelectorComponent, var declarations: Seq[RuleO
     //(top,right,bottom,left)
     val boolResult : Array [Boolean] =   new Array[Boolean](4)
     val marginValues : Array[ValueComponent] = new Array[ValueComponent](4)
-      for(declaration <- declarations){
+    //must consist of basic components
+    val basicDeclarations : Seq[DeclarationComponent] = getBasicDeclarations()
+      for(declaration <- basicDeclarations){
         if(declaration.containsMarginProperty()){
           var index : Int = 0
             declaration.getMarginPosition() match {
@@ -69,7 +71,7 @@ class RuleComponent(val selector: SelectorComponent, var declarations: Seq[RuleO
     var isFirst : Boolean= true
     val marginAggregate : String = margins.map(valCom => valCom.getStringValue()).mkString(" ")
     var newDeclarations: Seq[DeclarationComponent] = Seq()
-    for(declaration <- declarations){
+    for(declaration <- declarations.asInstanceOf[Seq[DeclarationComponent]]){
       if(declaration.containsMarginProperty()){
         if(isFirst){
           //the first margin property is replaces with the full margin specification
@@ -85,7 +87,7 @@ class RuleComponent(val selector: SelectorComponent, var declarations: Seq[RuleO
 
   def numberOfDeclarationsOfPropertyWithName(propertyName: String) : Int = {
     //in case a rule has multiple declarations of a certain property
-    declarations.filter(dec => dec.hasPropertyName(propertyName)).length
+    declarations.asInstanceOf[Seq[DeclarationComponent]].filter(dec => dec.hasPropertyName(propertyName)).length
   }
 
   def hasDeclarationWithPropertyName(propertyName: String) : Boolean = numberOfDeclarationsOfPropertyWithName(propertyName) != 0
@@ -118,7 +120,7 @@ class RuleComponent(val selector: SelectorComponent, var declarations: Seq[RuleO
         if(secondSheet.hasSameSelector(this.selector)){
           //has identical selector
             val matchingRightRule : RuleComponent = secondSheet.getRuleOfSelector(this.selector)
-            val leftOverDeclarations : Seq[DeclarationComponent] = matchingRightRule.mergeInDeclarations(this.declarations)
+            val leftOverDeclarations : Seq[DeclarationComponent] = matchingRightRule.mergeInDeclarations(this.declarations.asInstanceOf[Seq[DeclarationComponent]])
           Seq()
         }else if(this.hasGroupSelectorComponent()){
           //When this is a group selector component
@@ -130,7 +132,7 @@ class RuleComponent(val selector: SelectorComponent, var declarations: Seq[RuleO
              if(secondSheet.hasSameSelector(currentSelector)){
                //second sheet has the same selector as the current selector in the group
                val matchingRightRule : RuleComponent = secondSheet.getRuleOfSelector(currentSelector)
-               matchingRightRule.mergeInDeclarations(this.declarations)
+               matchingRightRule.mergeInDeclarations(this.declarations.asInstanceOf[Seq[DeclarationComponent]])
              } else {
                newSelectors = newSelectors :+ currentSelector
              }
@@ -163,6 +165,17 @@ class RuleComponent(val selector: SelectorComponent, var declarations: Seq[RuleO
     uniqueDeclarations
   }
 
+
+
+  //---------------------------------------
+  //--------- NESTED STYLE RULES ----------
+  //---------------------------------------
+
+
+  def replaceParentWithSelectorComponent(parentSelector: SelectorComponent) : SelectorComponent = {
+    selector.replaceParentWithSelectorComponent(parentSelector)
+  }
+
   /**
     * One rule component with nested selectors can contain multiple "basic" rule components.
     * This method transforms the rule component to a Seq of "basic" rule components.
@@ -172,28 +185,43 @@ class RuleComponent(val selector: SelectorComponent, var declarations: Seq[RuleO
     */
   def toBasicComponents(): Seq[RuleComponent] = {
     //this Seq contains the basic rules and the declarations of the current rule
-    val plainDeclarationsOfCurrentRule : Seq[RuleOrDeclarationComponent] = getPlainDeclarationOfCurrentRule()
-    if(plainDeclarationsOfCurrentRule.isEmpty)  getInnerRules() else new RuleComponent(selector,plainDeclarationsOfCurrentRule) +: getInnerRules()
+    toBasicComponentsHelper(selector)
   }
 
-  def toBasicComponents(currentParentSelector: SelectorComponent) : Seq[RuleOrDeclarationComponent] = {
-    //TODO 
+  def toBasicComponents(currentParentSelector: SelectorComponent) : Seq[RuleComponent] = {
+    val nextParentValue = replaceParentWithSelectorComponent(currentParentSelector)
+    toBasicComponentsHelper(nextParentValue)
+  }
+
+  protected def toBasicComponentsHelper(sel: SelectorComponent) : Seq[RuleComponent] = {
+    val plainDeclarationsOfCurrentRule : Seq[RuleOrDeclarationComponent] = getPlainDeclarationOfCurrentRule(sel)
+    if(plainDeclarationsOfCurrentRule.isEmpty)  getInnerRules(sel) else new RuleComponent(sel,plainDeclarationsOfCurrentRule) +: getInnerRules(sel)
+  }
+
+  protected def getPlainDeclarationOfCurrentRule(sel: SelectorComponent): Seq[RuleOrDeclarationComponent] = {
+    basicComponentWhereParentsRemoved(sel).filter(rd => rd.isDeclarationComponent())
+  }
+
+  protected def getInnerRules(sel: SelectorComponent) : Seq[RuleComponent] = {
+    basicComponentWhereParentsRemoved(sel).filter(rd => rd.isRuleComponent()).asInstanceOf[Seq[RuleComponent]]
+  }
+
+  private def basicComponentWhereParentsRemoved(sel: SelectorComponent) : Seq[RuleOrDeclarationComponent] = {
+    declarations.map(declaration => declaration.toBasicComponents(sel)).flatten
+  }
+
+
+  private def getBasicDeclarations(): Seq[DeclarationComponent] = {
+    toBasicComponents().asInstanceOf[Seq[DeclarationComponent]]
+  }
+
+  override def containsMarginProperty(): Boolean = {
+    declarations.exists(dec => dec.containsMarginProperty())
   }
 
 
 
-  protected def getPlainDeclarationOfCurrentRule(): Seq[RuleOrDeclarationComponent] = {
-    basicComponentWhereParentsRemoved().filter(rd => rd.isDeclarationComponent())
-  }
 
-
-  protected def getInnerRules() : Seq[RuleComponent] = {
-    basicComponentWhereParentsRemoved().filter(rd => rd.isRuleComponent()).asInstanceOf[Seq[RuleComponent]]
-  }
-
-  private def basicComponentWhereParentsRemoved() : Seq[RuleOrDeclarationComponent] = {
-    declarations.map(declaration => declaration.toBasicComponents(selector)).flatten
-  }
 
 
 }

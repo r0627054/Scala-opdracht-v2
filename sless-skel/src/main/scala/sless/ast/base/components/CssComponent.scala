@@ -7,7 +7,7 @@ import sless.ast.base.components.selector.constructors.AllSelectorComponent
 class CssComponent(val rules: Seq[RuleComponent]) extends BaseComponent {
 
   def aggregateMargins(): (Boolean, CssComponent) = {
-    val (isAggregated,allRules) :(Seq[Boolean], Seq[RuleComponent])=rules.map(rule => rule.aggregateMargins()).unzip
+    val (isAggregated,allRules) :(Seq[Boolean], Seq[RuleComponent])=getBasicRulesOfCss.map(rule => rule.aggregateMargins()).unzip
     (isAggregated.forall(isAgg => isAgg), new CssComponent(allRules))
   }
 
@@ -30,11 +30,11 @@ class CssComponent(val rules: Seq[RuleComponent]) extends BaseComponent {
   }
 
   def removedEmptyRules: Seq[RuleComponent] = {
-    rules.filter(r => r.hasDeclarations)
+    getBasicRulesOfCss.filter(r => r.hasDeclarations)
   }
 
   def hasAnEmptyRule: Boolean = {
-    rules.exists(r => r.hasNoDeclarations)
+    getBasicRulesOfCss.exists(r => r.hasNoDeclarations)
   }
 
   def removeEmptyRules(): (Boolean, CssComponent) = {
@@ -42,7 +42,7 @@ class CssComponent(val rules: Seq[RuleComponent]) extends BaseComponent {
   }
 
   def numberOfDeclarationsOfPropertyWithName(propertyName: String) : Int = {
-    rules.map(rule => rule.numberOfDeclarationsOfPropertyWithName(propertyName)).sum
+    getBasicRulesOfCss.map(rule => rule.numberOfDeclarationsOfPropertyWithName(propertyName)).sum
   }
 
   //-------------------------------
@@ -51,15 +51,17 @@ class CssComponent(val rules: Seq[RuleComponent]) extends BaseComponent {
 
 
   def replaceGivenSelectorWith(oldSelector: SelectorComponent, newSelector: SelectorComponent): Css ={
-    val replacedRules: Seq[Rule] = rules.map(rule => rule.replaceGivenSelectorWith(oldSelector,newSelector))
+    val replacedRules: Seq[Rule] = getBasicRulesOfCss.map(rule => rule.replaceGivenSelectorWith(oldSelector,newSelector))
     new CssComponent(replacedRules)
   }
 
   def replaceAllExtendedSelectors() : CssComponent = {
 
     //TODO needs to have basic css
-    var currentCss : CssComponent = this
-    for(rule <- rules) {
+    //var currentCss : CssComponent = this
+    val currentRules : Seq[RuleComponent] = getBasicRulesOfCss
+    var currentCss : CssComponent = this.toBasicComponents()
+    for(rule <- currentRules) {
       currentCss = rule.extendSelectorReplacement(currentCss)
     }
     currentCss
@@ -87,14 +89,6 @@ class CssComponent(val rules: Seq[RuleComponent]) extends BaseComponent {
   //als er unieke declaraties zijn bij een propertie zijn zet deze dan bij de rechtse
   //als er dubbele declaraties zijn bij een propertie behoud de rechtse
   def mergeCssComponents(firstSheet: CssComponent, secondSheet: CssComponent): CssComponent = {
-    /*for(firstSheetRule <- firstSheet.rules){
-      if(firstSheetRule.hasGroupSelectorComponent()){
-        //wanneer de linkse rule een lijst van selectors is
-
-      } else {
-        // een enkele selector
-      }
-    }*/
     var newLeftRules : Seq[RuleComponent] = Seq()
     for(firstSheetRule <- firstSheet.rules){
       newLeftRules = newLeftRules ++ firstSheetRule.mergeInSheet(secondSheet)
@@ -136,7 +130,9 @@ class CssComponent(val rules: Seq[RuleComponent]) extends BaseComponent {
       new CssComponent(rulesMadeOfBasicComponents)
   }
 
-
+  def getBasicRulesOfCss() : Seq[RuleComponent] = {
+    this.toBasicComponents().rules
+  }
 
 
 }

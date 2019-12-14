@@ -1,5 +1,6 @@
 package sless.ast.base.components.declaration
 
+import sless.ast.base.components.selector.SelectorComponent
 import sless.ast.base.components.value.ValueComponent
 import sless.ast.base.components.{BaseComponent, CssComponent, PropertyComponent, RuleOrDeclarationComponent}
 import sless.ast.base.enumeration.MarginType
@@ -32,4 +33,5 @@ class DeclarationComponent(val prop: PropertyComponent, val value: ValueComponen
 
   def getPropertyName() : String = prop.getPropertyName()
 
+  override def toBasicComponents(currentParentSelector: SelectorComponent): Seq[RuleOrDeclarationComponent] = Seq(this)
 }
