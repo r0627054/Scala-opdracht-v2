@@ -4,8 +4,14 @@ package sless.ast.base.components.selector.modifiers
 import sless.ast.base.components.selector.SelectorComponent
 import sless.ast.base.components.value.ValueComponent
 
+/**
+  * The attribute name selector is a type of modifier selector.
+  *
+  * @param selector The actual selector.
+  * @param string   The  class name.
+  */
 case class AttributeSelectorComponent(override val selector: SelectorComponent, override val string: String, value: ValueComponent)
-  extends ModifierComponent(selector,string){
+  extends ModifierComponent(selector, string) {
 
   /**
     * Prints the basic representation of the attribute string and value of the attribute. Both between brackets.
@@ -30,6 +36,6 @@ case class AttributeSelectorComponent(override val selector: SelectorComponent, 
     * @return The Selector in which the parent selector is replaced with the given selector.
     */
   override def replaceParentWithSelectorComponent(parentSelector: SelectorComponent): SelectorComponent = {
-     AttributeSelectorComponent(selector.replaceParentWithSelectorComponent(parentSelector),string,value)
+    AttributeSelectorComponent(selector.replaceParentWithSelectorComponent(parentSelector), string, value)
   }
 }
