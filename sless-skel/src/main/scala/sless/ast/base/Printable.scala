@@ -10,7 +10,7 @@ trait Printable {
   /**
     * Prints the component very basic. Without unnecessary spaces or newlines.
     *
-    * @return the basic print string of the component.
+    * @return The basic print string of the component.
     */
   def basic(): String
 
@@ -18,7 +18,7 @@ trait Printable {
     * Prints the component pretty. The component contains spaces and newlines to pretty print.
     *
     * @param spaces The number of spaces places before a declaration.
-    * @return the pretty print string of the component
+    * @return The pretty print string of the component
     */
   def pretty(spaces: Int): String
 }

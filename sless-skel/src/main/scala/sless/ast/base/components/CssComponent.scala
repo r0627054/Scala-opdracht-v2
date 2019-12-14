@@ -56,11 +56,9 @@ class CssComponent(val rules: Seq[RuleComponent]) extends BaseComponent {
   }
 
   def replaceAllExtendedSelectors() : CssComponent = {
-
-    //TODO needs to have basic css
     //var currentCss : CssComponent = this
     val currentRules : Seq[RuleComponent] = getBasicRulesOfCss
-    var currentCss : CssComponent = this.toBasicComponents()
+    var currentCss : CssComponent = this.toBasicComponents
     for(rule <- currentRules) {
       currentCss = rule.extendSelectorReplacement(currentCss)
     }
@@ -101,12 +99,12 @@ class CssComponent(val rules: Seq[RuleComponent]) extends BaseComponent {
   }
 
   def hasSameSelector(sel: Selector) : Boolean = {
-    rules.map(rule => rule.hasSameSelector(sel)).contains(true)
+    rules.exists(rule => rule.hasSameSelector(sel))
   }
 
   def getRuleOfSelector(sel: Selector) : RuleComponent = {
     var hasResult : Boolean = false
-    var ruleResult : RuleComponent = new RuleComponent(new AllSelectorComponent(),Seq())
+    var ruleResult : RuleComponent = new RuleComponent(AllSelectorComponent(),Seq())
     for(rule <- rules){
       if(rule.hasSameSelector(sel)){
         hasResult = true
@@ -125,13 +123,13 @@ class CssComponent(val rules: Seq[RuleComponent]) extends BaseComponent {
   //-------------------------
 
 
-  def toBasicComponents() : CssComponent = {
-      val rulesMadeOfBasicComponents : Seq[RuleComponent] = rules.map(rule => rule.toBasicComponents()).flatten
+  def toBasicComponents: CssComponent = {
+      val rulesMadeOfBasicComponents : Seq[RuleComponent] = rules.flatMap(rule => rule.toBasicComponents())
       new CssComponent(rulesMadeOfBasicComponents)
   }
 
-  def getBasicRulesOfCss() : Seq[RuleComponent] = {
-    this.toBasicComponents().rules
+  def getBasicRulesOfCss: Seq[RuleComponent] = {
+    this.toBasicComponents.rules
   }
 
 
