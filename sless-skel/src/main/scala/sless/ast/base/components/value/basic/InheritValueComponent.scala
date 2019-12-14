@@ -8,6 +8,7 @@ import sless.ast.base.components.value.ValueComponent
 class InheritValueComponent extends ValueComponent {
   /**
     * The string representation of the value equals "inherit"
+    *
     * @return The string representation of the value.
     */
   override def getStringValue: String = "inherit"

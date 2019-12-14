@@ -229,7 +229,7 @@ class RuleComponent(val selector: SelectorComponent, var declarations: Seq[RuleO
   }
 
   def hasParentSelectorComponent() : Boolean = {
-    selector.hasParentSelectorComponent()
+    selector.hasParentSelectorComponent
   }
 
 
