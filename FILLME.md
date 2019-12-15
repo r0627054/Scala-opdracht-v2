@@ -1,4 +1,4 @@
-# Sless
+# Sless Dries Janse (r0627054)
 ## Implementation
 
 The following Selss Extensions are made:
