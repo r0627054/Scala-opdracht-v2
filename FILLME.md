@@ -33,12 +33,12 @@ Some provided test files are extended with, own written tests. This tests the mo
 ## Better Values
 The Better Values extension is implemented as follow. A value can be a basic value or a property specific value.
 * The following basic values are considered:
-** AutoValueComponent -> represents the 'auto' value
-** BasicValueComponent -> represents a normal string value
-** EmptyValueComponent -> represents the empty string
-** InheritValueComponent -> represents the 'inherit' value
-** LengthValueComponent -> represents all the values which can be expressed as a length. It contains the case class for pixels, points, mm, cm, em, %, inches, picas, ex, ...
-C
+  * AutoValueComponent -> represents the 'auto' value
+  * BasicValueComponent -> represents a normal string value
+  * EmptyValueComponent -> represents the empty string
+  * InheritValueComponent -> represents the 'inherit' value
+  * LengthValueComponent -> represents all the values which can be expressed as a length. It contains the case class for pixels, points, mm, cm, em, %, inches, picas, ex, ...
+
 * Currently only one property specific value is implemented, but this can be easily extended. Margin is a property specific value and is composed out of the above basic values. The same can be done for example Padding, etc.
 
 
