@@ -1,24 +1,41 @@
 package sless.dsl
 
+/**
+  * The better value DSL contains all the methods to create basic value components and property specific value components.
+  * The following value components are considered basic: Pixel, Pica, Point, mm, cm, in, em, ex, %, auto, inherit
+  * The following value components are property specific: all margin values
+  */
 trait BetterValuesDSL extends ValueDSL {
 
   def inherit: Value
+
   def auto: Value
 
-  def Margin(value1: Value) : Value
-  def Margin(value1: Value,value2: Value) : Value
-  def Margin(value1: Value,value2: Value,value3: Value) : Value
-  def Margin(value1: Value,value2: Value,value3: Value,value4: Value) : Value
+  def Margin(value1: Value): Value
 
-  protected def createPixelValue(pixels: Double) : Value
-  protected def createPicasValue(picas: Double) : Value
-  protected def createPointsValue(points: Double) : Value
-  protected def createMilliMeterValue(mms: Double) : Value
-  protected def createCentiMeterValue(cms: Double) : Value
-  protected def createInchesValue(inches: Double) : Value
-  protected def createEmValue(ems: Double) : Value
-  protected def createExValue(exs: Double) : Value
-  protected def createPercentageValue(pers: Double) : Value
+  def Margin(value1: Value, value2: Value): Value
+
+  def Margin(value1: Value, value2: Value, value3: Value): Value
+
+  def Margin(value1: Value, value2: Value, value3: Value, value4: Value): Value
+
+  protected def createPixelValue(pixels: Double): Value
+
+  protected def createPicasValue(picas: Double): Value
+
+  protected def createPointsValue(points: Double): Value
+
+  protected def createMilliMeterValue(mms: Double): Value
+
+  protected def createCentiMeterValue(cms: Double): Value
+
+  protected def createInchesValue(inches: Double): Value
+
+  protected def createEmValue(ems: Double): Value
+
+  protected def createExValue(exs: Double): Value
+
+  protected def createPercentageValue(pers: Double): Value
 
   implicit class PixelUnitShortHand(pixels: Double) {
     def px: Value = createPixelValue(pixels)

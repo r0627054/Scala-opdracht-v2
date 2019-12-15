@@ -5,22 +5,22 @@ import org.scalatest.FunSuite
 class LessLintTest extends FunSuite{
   import LessLintImplementation.dsl._
 
-  test("Remove empty rules") {
-    val container = tipe("div") ## "container"
+ test("Remove empty rules") {
+     val container = tipe("div") ## "container"
 
-    val ex = css(
-      N(All.c("class-name1"), All.c("class-name2"))(),
-      container {
-        prop("width") := value("100%")
-      },
-    )
+     val ex = css(
+       N(All.c("class-name1"), All.c("class-name2"))(),
+       container {
+         prop("width") := value("100%")
+       },
+     )
 
-   val (lintedBool, lintedEx) = removeEmptyRules(ex)
+    val (lintedBool, lintedEx) = removeEmptyRules(ex)
     assert(lintedBool === true)
-    assert(
-      LessLintImplementation.dsl.compile(lintedEx) ===
-        """div#container{width:100%;}""")
-  }
+     assert(
+       LessLintImplementation.dsl.compile(lintedEx) ===
+         """div#container{width:100%;}""")
+   }
 
     test("Aggregate margins") {
       val container = tipe("div") ## "container"
@@ -42,7 +42,7 @@ class LessLintTest extends FunSuite{
           """div#container{margin:25px 50px 75px 100px;width:100%;}""")
     }
 
-      test("Limit Floats") {
+     test("Limit Floats") {
         val container = tipe("div") ## "container"
         val fldecl = prop("float") := value("left")
 

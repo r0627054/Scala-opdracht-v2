@@ -4,12 +4,16 @@ import sless.ast.base.BaseAST
 import sless.ast.base.components.CssComponent
 import sless.dsl.LintDSL
 
+/**
+  * A lint creator is a creator class which implements the LintDSL methods.
+  */
 trait LintCreator extends BaseAST with LintDSL {
+  
   /**
     * Check if the given sheet has any style rules without declarations, i.e. of the form "selector {}"
     */
   override def removeEmptyRules(css: CssComponent): (Boolean, CssComponent) = {
-      css.removeEmptyRules()
+    css.removeEmptyRules()
   }
 
   /**
