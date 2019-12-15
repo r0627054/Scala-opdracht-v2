@@ -23,12 +23,23 @@ The project is implemented as a focus on extensibility, each component is constr
 
 ## Extra
 
-Write which files, if any, contain extra self-written tests. If you did something extra impressive let us know here as well!
+Some provided test files are extended with, own written tests. This tests the more in depth functionallity of the features. The following files are extended with self written tests:
+* MixinTest
+* MergeTest 
+* LessNestingTest
+* LessVariableTest
+* BetterValuesTest
 
 ## Better Values
-
-Explain your implementation briefly, if you chose to implement this extension.
-* All values representing a length (px, em, pt, mm) all extend the abstract LengthValueComponent class. If another length is introduced, a new class is created for it and it will extend the LengthValueComponent class.
+The Better Values extension is implemented as follow. A value can be a basic value or a property specific value.
+* The following basic values are considered:
+** AutoValueComponent -> represents the 'auto' value
+** BasicValueComponent -> represents a normal string value
+** EmptyValueComponent -> represents the empty string
+** InheritValueComponent -> represents the 'inherit' value
+** LengthValueComponent -> represents all the values which can be expressed as a length. It contains the case class for pixels, points, mm, cm, em, %, inches, picas, ex, ...
+C
+* Currently only one property specific value is implemented, but this can be easily extended. Margin is a property specific value and is composed out of the above basic values. The same can be done for example Padding, etc.
 
 
 ## Improving original features
