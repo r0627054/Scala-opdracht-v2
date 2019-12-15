@@ -1,4 +1,16 @@
 # Sless
+## Implementation
+
+The following Selss Extensions are made:
+- [x] Comments
+- [x] Merge CSS sheets (imports)
+- [x] Mixins
+- [x] Nested style rules
+- [x] Better Values
+- [x] Extend
+
+As an extra, scala documentation is added to all own written classes. This scala documentation is exported to html files and can be find in the [doc folder](doc).
+
 
 ## Extensibility
 
