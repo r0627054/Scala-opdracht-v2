@@ -214,7 +214,7 @@ class CssComponent(val rules: Seq[RuleComponent]) extends BaseComponent {
     * @return The new basic CSS component.
     */
   def toBasicComponents: CssComponent = {
-    val rulesMadeOfBasicComponents: Seq[RuleComponent] = rules.flatMap(rule => rule.toBasicComponents())
+    val rulesMadeOfBasicComponents: Seq[RuleComponent] = rules.flatMap(rule => rule.toBasicComponents)
     new CssComponent(rulesMadeOfBasicComponents)
   }
 
