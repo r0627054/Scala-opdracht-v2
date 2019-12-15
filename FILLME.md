@@ -16,9 +16,9 @@ As an extra, scala documentation is added to all own written classes. This scala
 
 The project is implemented as a focus on extensibility, each component is constructed out of other compontents. Given the following examples:
 
-*A new css component can easily be added, it only needs the extend the right Base Component. For example, if more specific attribute selectors are required, subclasses can be made of the AttributeSelectorComponent class. These classes have to override the "basic" and "pretty" method, no other classes need to change.
+* A new css component can easily be added, it only needs the extend the right Base Component. For example, if more specific attribute selectors are required, subclasses can be made of the AttributeSelectorComponent class. These classes have to override the "basic" and "pretty" method, no other classes need to change.
 
-*If new functionallity needs to be added, only the corresponding classed need to implement these functionallity. No other methods needs to change. For example, if a new print method such as "compile" or "pretty" need to be added, all the components will need to handle their own implementation, no other exisiting methods needs to be modified. 
+* If new functionallity needs to be added, only the corresponding classed need to implement these functionallity. No other methods needs to change. For example, if a new print method such as "compile" or "pretty" need to be added, all the components will need to handle their own implementation, no other exisiting methods needs to be modified. 
 
 
 ## Extra
