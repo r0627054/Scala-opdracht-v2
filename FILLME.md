@@ -37,22 +37,20 @@ The Better Values extension is implemented as follow. A value can be a basic val
   * BasicValueComponent -> represents a normal string value
   * EmptyValueComponent -> represents the empty string
   * InheritValueComponent -> represents the 'inherit' value
-  * LengthValueComponent -> represents all the values which can be expressed as a length. It contains the case class for pixels, points, mm, cm, em, %, inches, picas, ex, ...
+  * LengthValueComponent -> represents all the values which can be expressed as a length. It contains the case classes for: pixels, points, mm, cm, em, %, inches, picas, ex, ...
 
-* Currently only one property specific value is implemented, but this can be easily extended. Margin is a property specific value and is composed out of the above basic values. The same can be done for example Padding, etc.
+* Currently only one property specific value is implemented, but this can be easily extended. Margin is a property specific value and is composed out of the above basic values. The same can be done for other property specific values such as: padding, border etc.
 
 
 ## Improving original features
 
-If you chose to extend some of the original features as an extensions, properly document what you did here.
+Non of the original features were extended.
 
 ## Custom Extension
 
-If you came up with your own extension, properly document it here. Explain its
-intended behavior and showcase by example.
+The extension I added was the clear documentation of my own written classes. The extensive capabilities of Better values such as pixels, points, mm, em, ... can be seen as an extra extension of the Better Values extension.
 
 ## Feedback on the Project 
 
-After working on this project for such a long time, you're allowed to vent in this
-section. Tell us what you learned or what you would've liked to learn instead,
-etc. This does not count toward your grades at all (neither positive nor negative).
+The project is a nice touch to course because, it deepens your knowledge of the language.
+In my opinion does this project consumes way over the provided 40 hours of this course. Which is a disadvantage because of the amount of work in the Master of Toegepaste Informatica.
