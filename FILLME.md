@@ -18,7 +18,7 @@ The project is implemented as a focus on extensibility, each component is constr
 
 * A new css component can easily be added, it only needs the extend the right Base Component. For example, if more specific attribute selectors are required, subclasses can be made of the AttributeSelectorComponent class. These classes have to override the "basic" and "pretty" method, no other classes need to change.
 
-* If new functionallity needs to be added, only the corresponding classed need to implement these functionallity. No other methods needs to change. For example, if a new print method such as "compile" or "pretty" need to be added, all the components will need to handle their own implementation, no other exisiting methods needs to be modified. 
+* If new functionallity needs to be added, only the corresponding classes need to implement these functionallity. No other methods needs to change. For example, if a new print method, such as "compile" or "pretty", need to be added all the components will need to handle their own implementation, no other exisiting methods needs to be modified. 
 
 
 ## Extra
@@ -39,7 +39,7 @@ The Better Values extension is implemented as follow. A value can be a basic val
   * InheritValueComponent -> represents the 'inherit' value
   * LengthValueComponent -> represents all the values which can be expressed as a length. It contains the case classes for: pixels, points, mm, cm, em, %, inches, picas, ex, ...
 
-* Currently only one property specific value is implemented, but this can be easily extended. Margin is a property specific value and is composed out of the above basic values. The same can be done for other property specific values such as: padding, border etc.
+* Currently only one property specific value is implemented, but this can be easily extended. Margin is a property specific value and is composed out of the above basic values. The same can be done for other property specific values such as: padding, border, etc.
 
 
 ## Improving original features
@@ -48,9 +48,9 @@ Non of the original features were extended.
 
 ## Custom Extension
 
-The extension I added was the clear documentation of my own written classes. The extensive capabilities of Better values such as pixels, points, mm, em, ... can be seen as an extra extension of the Better Values extension.
+The extension I added was the documentation of my own written classes. The extensive capabilities of Better Values such as pixels, points, mm, em, ... can be seen as an extra extension of the Better Values extension.
 
 ## Feedback on the Project 
 
 The project is a nice touch to course because, it deepens your knowledge of the language.
-In my opinion does this project consumes way over the provided 40 hours of this course. Which is a disadvantage because of the amount of work in the Master of Toegepaste Informatica.
+This project consumes, in my opinion, way over the provided 40 hours of the course. Which is a disadvantage because of the amount of work in the Master of Toegepaste Informatica.
