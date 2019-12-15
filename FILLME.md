@@ -9,13 +9,17 @@ The following Selss Extensions are made:
 - [x] Better Values
 - [x] Extend
 
-As an extra, scala documentation is added to all own written classes. This scala documentation is exported to html files and can be find in the [doc folder](doc).
+As an extra, scala documentation is added to all own written classes. This scala documentation is exported to html files and can be found in the [doc folder](doc).
 
 
 ## Extensibility
 
-Briefly explain which files you have to change to introduce a new sless feature, e.g. add a new pseudo-class/-element, add support for namespaces, add at-rules, etc. 
-Hint: if this lists all the files in your project you should reevaluate your implementation.
+The project is implemented as a focus on extensibility, each component is constructed out of other compontents. Given the following examples:
+
+*A new css component can easily be added, it only needs the extend the right Base Component. For example, if more specific attribute selectors are required, subclasses can be made of the AttributeSelectorComponent class. These classes have to override the "basic" and "pretty" method, no other classes need to change.
+
+*If new functionallity needs to be added, only the corresponding classed need to implement these functionallity. No other methods needs to change. For example, if a new print method such as "compile" or "pretty" need to be added, all the components will need to handle their own implementation, no other exisiting methods needs to be modified. 
+
 
 ## Extra
 
@@ -24,6 +28,8 @@ Write which files, if any, contain extra self-written tests. If you did somethin
 ## Better Values
 
 Explain your implementation briefly, if you chose to implement this extension.
+* All values representing a length (px, em, pt, mm) all extend the abstract LengthValueComponent class. If another length is introduced, a new class is created for it and it will extend the LengthValueComponent class.
+
 
 ## Improving original features
 
